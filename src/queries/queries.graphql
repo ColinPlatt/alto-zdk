@@ -96,30 +96,6 @@ fragment SaleInfo on Sale {
   tokenId
 }
 
-fragment V2AuctionMarketProperties on V2Auction {
-  __typename
-  firstBidTime
-  highestBidder
-  curator
-  collectionAddress
-  curatorFeePercentage
-  tokenId
-  auctionCurrency
-  duration
-  estimatedExpirationTime
-  v2AuctionStatus
-  tokenOwner
-  address
-  auctionId
-  approved
-  reservePrice {
-    ...PriceSummary
-  }
-  highestBidPrice {
-    ...PriceSummary
-  }
-}
-
 fragment V3AskProperties on V3Ask {
   __typename
   buyer
@@ -136,30 +112,9 @@ fragment V3AskProperties on V3Ask {
   }
 }
 
-fragment V1OfferProperties on V1Offer {
-  v1OfferStatus
-  sellOnShare
-  bidder
-  currency
-  amount {
-    ...PriceSummary
-  }
-}
-
-fragment V1AskProperties on V1Ask {
-  v1AskStatus
-  currency
-  amount {
-    ...PriceSummary
-  }
-}
-
 fragment MarketPropertiesFull on MarketProperties {
   __typename
-  ...V2AuctionMarketProperties
   ...V3AskProperties
-  ...V1OfferProperties
-  ...V1AskProperties
 }
 
 fragment NetworkInfoDetails on NetworkInfo {
@@ -208,112 +163,6 @@ fragment TokenInfo on Token {
   }
   content {
     ...FullMedia
-  }
-}
-
-fragment V1MarketEventPropertiesInfo on V1MarketEventProperties {
-  __typename
-  ... on V1MarketAskCreatedEventProperties {
-    amount
-    price {
-      ...PriceSummary
-    }
-    currency
-  }
-  ... on V1MarketAskRemovedEventProperties {
-    amount
-    price {
-      ...PriceSummary
-    }
-    currency
-  }
-  ... on V1MarketOfferCreatedEventProperties {
-    amount
-    price {
-      ...PriceSummary
-    }
-    currency
-    bidder
-  }
-  ... on V1MarketOfferFinalizedEventProperties {
-    amount
-    price {
-      ...PriceSummary
-    }
-    currency
-    bidder
-  }
-  ... on V1MarketOfferRemovedEventProperties {
-    amount
-    price {
-      ...PriceSummary
-    }
-    currency
-    bidder
-  }
-}
-
-fragment V2AuctionEventPropertiesInfo on V2AuctionEventProperties {
-  __typename
-  ... on V2AuctionBidEventProperties {
-    sender
-    firstBid
-    extended
-    value
-    price {
-      ...PriceSummary
-    }
-  }
-  ... on V2AuctionCreatedEventProperties {
-    auctionCurrency
-    tokenOwner
-    curator
-    curatorFeePercentage
-    duration
-    reservePrice
-    price {
-      ...PriceSummary
-    }
-  }
-  ... on V2AuctionCanceledEventProperties {
-    tokenOwner
-  }
-  ... on V2AuctionDurationExtendedEventProperties {
-    duration
-  }
-  ... on V2AuctionBidEventProperties {
-    sender
-    firstBid
-    extended
-    value
-    price {
-      ...PriceSummary
-    }
-  }
-  ... on V2AuctionEndedEventProperties {
-    tokenOwner
-    curator
-    winner
-    auctionCurrency
-    amount
-    curatorFee
-  }
-  ... on V2AuctionReservePriceUpdatedEventProperties {
-    reservePrice
-    price {
-      ...PriceSummary
-    }
-  }
-  ... on V2AuctionEndedEventProperties {
-    tokenOwner
-    curator
-    winner
-    auctionCurrency
-    amount
-    curatorFee
-  }
-  ... on V2AuctionApprovalUpdatedEventProperties {
-    approved
   }
 }
 
@@ -386,27 +235,6 @@ fragment EventInfo on Event {
       toAddress
       collectionAddress
       tokenId
-    }
-    ... on V1MarketEvent {
-      v1MarketEventType
-      address
-      collectionAddress
-      tokenId
-
-      properties {
-        ...V1MarketEventPropertiesInfo
-      }
-    }
-    ... on V2AuctionEvent {
-      v2AuctionEventType
-      address
-      auctionId
-      collectionAddress
-      tokenId
-
-      properties {
-        ...V2AuctionEventPropertiesInfo
-      }
     }
     ... on V3AskEvent {
       v3AskEventType
@@ -505,64 +333,6 @@ query events(
   }
 }
 
-fragment LilNounsAuctionInfo on LilNounsAuction {
-  address
-  tokenId
-  collectionAddress
-  auctionId
-  auctionCurrency
-  highestBidPrice {
-    __typename
-    ...PriceSummary
-  }
-  startTime
-  endTime
-  duration
-  firstBidTime
-  highestBidder
-  estimatedDurationTime
-  lilNounsReservePrice: reservePrice {
-    __typename
-    ...PriceSummary
-  }
-  amount {
-    __typename
-    ...PriceSummary
-  }
-  minBidIncrementPercentage
-  winner
-  timeBuffer
-}
-
-fragment NounsAuctionInfo on NounsAuction {
-  address
-  tokenId
-  collectionAddress
-  auctionId
-  auctionCurrency
-  highestBidPrice {
-    __typename
-    ...PriceSummary
-  }
-  startTime
-  endTime
-  duration
-  firstBidTime
-  highestBidder
-  estimatedDurationTime
-  nounsReservePrice: reservePrice {
-    __typename
-    ...PriceSummary
-  }
-  amount {
-    __typename
-    ...PriceSummary
-  }
-  minBidIncrementPercentage
-  winner
-  timeBuffer
-}
-
 fragment V3ReserveAuctionProperties on V3ReserveAuction {
   address
   tokenId
@@ -612,15 +382,6 @@ fragment ActiveMarketInfo on ActiveMarket {
   marketType
   properties {
     __typename
-    ... on LilNounsAuction {
-      ...LilNounsAuctionInfo
-    }
-    ... on NounsAuction {
-      ...NounsAuctionInfo
-    }
-    ... on V2Auction {
-      ...V2AuctionMarketProperties
-    }
     ... on V3ReserveAuction {
       ...V3ReserveAuctionProperties
     }
@@ -853,105 +614,6 @@ query token($network: NetworkInput!, $token: TokenInput!, $includeFullDetails: B
     ) {
       ...MarketInfo
       ...MarketDetails @include(if: $includeFullDetails)
-    }
-  }
-}
-
-fragment SeaportOrderItemDetails on SeaportOrderItem {
-  itemType
-  address
-  tokenId
-  criteria
-  startAmount
-  endAmount
-  startPrice {
-    __typename
-    ...PriceSummary
-  }
-  endPrice {
-    __typename
-    ...PriceSummary
-  }
-  recipient
-}
-
-fragment SeaportOrderDetails on SeaportOrder {
-  orderHash
-  offerer
-  startTime
-  endTime
-  orderType
-  price {
-    __typename
-    ...PriceSummary
-  }
-  offers {
-    __typename
-    ...SeaportOrderItemDetails
-  }
-  considerations {
-    __typename
-    ...SeaportOrderItemDetails
-  }
-  zone
-  zoneHash
-  salt
-  conduitKey
-  counter
-  signature
-  schemaHash
-}
-
-fragment OffchainOrderInfo on OffchainOrder {
-  networkInfo {
-    __typename
-    ...NetworkInfoDetails
-  }
-  contractAddress
-  collectionAddress
-  tokenId
-  offerer
-  startTime
-  endTime
-  orderType
-  price {
-    __typename
-    ...PriceSummary
-  }
-  properties {
-    ...SeaportOrderDetails
-  }
-  calldata
-}
-
-query offchainOrders(
-  $networks: [NetworkInput!]
-  $where: OffchainOrdersQueryInput
-  $filter: OffchainOrdersQueryFilter
-  $sort: OffchainOrderSortKeySortInput
-  $pagination: PaginationInput
-) {
-  offchainOrders(
-    networks: $networks,
-    where: $where,
-    filter: $filter,
-    sort: $sort,
-    pagination: $pagination
-  ) {
-    nodes {
-      __typename
-      token {
-        __typename
-        ...TokenInfo
-      }
-      offchainOrder {
-        __typename
-        ...OffchainOrderInfo
-      }
-    }
-    pageInfo {
-      __typename
-      ...PageInfoDefault
     }
   }
 }

@@ -20,7 +20,7 @@ type ActiveMarket {
   price: PriceAtTime
 }
 
-union ActiveMarketProperties = LilNounsAuction | NounsAuction | V2Auction | V3ReserveAuction
+union ActiveMarketProperties = V3ReserveAuction
 
 input ActiveMarketQueryInput {
   marketType: ActiveMarketType!
@@ -28,9 +28,6 @@ input ActiveMarketQueryInput {
 }
 
 enum ActiveMarketType {
-  ACTIVE_LIL_NOUNS_AUCTION
-  ACTIVE_NOUNS_AUCTION
-  ACTIVE_V2_AUCTION
   ACTIVE_V3_RESERVE_AUCTION
 }
 
@@ -84,9 +81,7 @@ type AudioEncodingTypes {
 }
 
 enum Chain {
-  MAINNET
-  GOERLI
-  RINKEBY
+  CANTO
 }
 
 type Collection {
@@ -169,7 +164,7 @@ type EventConnection {
   pageInfo: PageInfo!
 }
 
-union EventProperties = ApprovalEvent | LilNounsAuctionEvent | MintEvent | NounsAuctionEvent | Sale | SeaportEvent | TransferEvent | V1MarketEvent | V2AuctionEvent | V3AskEvent | V3ReserveAuctionEvent
+union EventProperties = ApprovalEvent | MintEvent | Sale | TransferEvent | V3AskEvent | V3ReserveAuctionEvent
 
 enum EventSortKey {
   CREATED
@@ -196,14 +191,9 @@ input EventsQueryInput {
 
 enum EventType {
   APPROVAL_EVENT
-  LIL_NOUNS_AUCTION_EVENT
-  NOUNS_AUCTION_EVENT
   SALE_EVENT
-  SEAPORT_EVENT
   MINT_EVENT
   TRANSFER_EVENT
-  V1_MARKET_EVENT
-  V2_AUCTION_EVENT
   V3_ASK_EVENT
   V3_RESERVE_AUCTION_EVENT
 }
@@ -221,83 +211,6 @@ union ImageEncodingTypesVideoEncodingTypesAudioEncodingTypesUnsupportedEncodingT
 The GenericScalar scalar type represents a generic GraphQL scalar value that could be: List or Object.
 """
 scalar JSONScalar
-
-type LilNounsAuction {
-  address: String!
-  tokenId: String!
-  collectionAddress: String!
-  auctionId: String!
-  auctionCurrency: String!
-  highestBidPrice: PriceAtTime
-  startTime: String!
-  endTime: String!
-  duration: String!
-  firstBidTime: datetime
-  highestBidder: String
-  estimatedDurationTime: datetime
-  reservePrice: PriceAtTime
-  amount: PriceAtTime
-  minBidIncrementPercentage: Int
-  winner: String
-  timeBuffer: Int
-}
-
-type LilNounsAuctionBidEventProperties {
-  lilNounId: String!
-  sender: String!
-  value: String!
-  extended: Boolean!
-}
-
-type LilNounsAuctionCreatedEventProperties {
-  lilNounId: String!
-  startTime: String!
-  endTime: String!
-}
-
-type LilNounsAuctionEvent {
-  lilNounsAuctionEventType: LilNounsAuctionEventType!
-  address: String!
-  collectionAddress: String!
-  tokenId: String!
-  properties: LilNounsAuctionEventProperties!
-}
-
-union LilNounsAuctionEventProperties = LilNounsAuctionCreatedEventProperties | LilNounsAuctionBidEventProperties | LilNounsAuctionExtendedEventProperties | LilNounsAuctionSettledEventProperties | LilNounsAuctionTimeBufferUpdatedEventProperties | LilNounsAuctionReservePriceUpdatedEventProperties | LilNounsAuctionMinBidIncrementPercentageUpdatedEventProperties
-
-enum LilNounsAuctionEventType {
-  LIL_NOUNS_AUCTION_HOUSE_AUCTION_CREATED_EVENT
-  LIL_NOUNS_AUCTION_HOUSE_AUCTION_BID_EVENT
-  LIL_NOUNS_AUCTION_HOUSE_AUCTION_EXTENDED_EVENT
-  LIL_NOUNS_AUCTION_HOUSE_AUCTION_SETTLED_EVENT
-  LIL_NOUNS_AUCTION_HOUSE_AUCTION_TIME_BUFFER_UPDATED_EVENT
-  LIL_NOUNS_AUCTION_HOUSE_AUCTION_RESERVE_PRICE_UPDATED_EVENT
-  LIL_NOUNS_AUCTION_HOUSE_AUCTION_MIN_BID_INCREMENT_PERCENTAGE_UPDATED
-}
-
-type LilNounsAuctionExtendedEventProperties {
-  lilNounId: String!
-  endTime: String!
-}
-
-type LilNounsAuctionMinBidIncrementPercentageUpdatedEventProperties {
-  minBidIncrementPercentage: String!
-}
-
-type LilNounsAuctionReservePriceUpdatedEventProperties {
-  reservePrice: String!
-}
-
-type LilNounsAuctionSettledEventProperties {
-  lilNounId: String!
-  winner: String!
-  amount: String!
-  price: PriceAtTime!
-}
-
-type LilNounsAuctionTimeBufferUpdatedEventProperties {
-  timeBuffer: String!
-}
 
 type Market {
   networkInfo: NetworkInfo!
@@ -317,7 +230,7 @@ enum MarketCategory {
   AUCTION
 }
 
-union MarketProperties = LilNounsAuction | NounsAuction | V1Ask | V1BidShare | V1Offer | V2Auction | V3Ask | V3ReserveAuction
+union MarketProperties = V3Ask | V3ReserveAuction
 
 enum MarketSortKey {
   NONE
@@ -350,12 +263,6 @@ enum MarketStatus {
 }
 
 enum MarketType {
-  LIL_NOUNS_AUCTION
-  NOUNS_AUCTION
-  V1_ASK
-  V1_BID_SHARE
-  V1_OFFER
-  V2_AUCTION
   V3_ASK
   V3_RESERVE_AUCTION
 }
@@ -446,7 +353,7 @@ type MintWithTokenAndMarketsConnection {
 }
 
 enum Network {
-  ETHEREUM
+  CANTO
 }
 
 type NetworkInfo {
@@ -455,291 +362,8 @@ type NetworkInfo {
 }
 
 input NetworkInput {
-  network: Network! = ETHEREUM
-  chain: Chain! = MAINNET
-}
-
-type NounsAuction {
-  address: String!
-  tokenId: String!
-  collectionAddress: String!
-  auctionId: String!
-  auctionCurrency: String!
-  highestBidPrice: PriceAtTime
-  startTime: String!
-  endTime: String!
-  duration: String!
-  firstBidTime: datetime
-  highestBidder: String
-  estimatedDurationTime: datetime
-  reservePrice: PriceAtTime
-  amount: PriceAtTime
-  minBidIncrementPercentage: Int
-  winner: String
-  timeBuffer: Int
-}
-
-type NounsAuctionBidEventProperties {
-  nounId: String!
-  sender: String!
-  value: String!
-  extended: Boolean!
-}
-
-type NounsAuctionCreatedEventProperties {
-  nounId: String!
-  startTime: String!
-  endTime: String!
-}
-
-type NounsAuctionEvent {
-  nounsAuctionEventType: NounsAuctionEventType!
-  address: String!
-  collectionAddress: String!
-  tokenId: String!
-  properties: NounsAuctionEventProperties!
-}
-
-union NounsAuctionEventProperties = NounsAuctionCreatedEventProperties | NounsAuctionBidEventProperties | NounsAuctionExtendedEventProperties | NounsAuctionSettledEventProperties | NounsAuctionTimeBufferUpdatedEventProperties | NounsAuctionReservePriceUpdatedEventProperties | NounsAuctionMinBidIncrementPercentageUpdatedEventProperties
-
-enum NounsAuctionEventType {
-  NOUNS_AUCTION_HOUSE_AUCTION_CREATED_EVENT
-  NOUNS_AUCTION_HOUSE_AUCTION_BID_EVENT
-  NOUNS_AUCTION_HOUSE_AUCTION_EXTENDED_EVENT
-  NOUNS_AUCTION_HOUSE_AUCTION_SETTLED_EVENT
-  NOUNS_AUCTION_HOUSE_AUCTION_TIME_BUFFER_UPDATED_EVENT
-  NOUNS_AUCTION_HOUSE_AUCTION_RESERVE_PRICE_UPDATED_EVENT
-  NOUNS_AUCTION_HOUSE_AUCTION_MIN_BID_INCREMENT_PERCENTAGE_UPDATED
-}
-
-type NounsAuctionExtendedEventProperties {
-  nounId: String!
-  endTime: String!
-}
-
-type NounsAuctionMinBidIncrementPercentageUpdatedEventProperties {
-  minBidIncrementPercentage: String!
-}
-
-type NounsAuctionReservePriceUpdatedEventProperties {
-  reservePrice: String!
-}
-
-type NounsAuctionSettledEventProperties {
-  nounId: String!
-  winner: String!
-  amount: String!
-  price: PriceAtTime!
-}
-
-type NounsAuctionTimeBufferUpdatedEventProperties {
-  timeBuffer: String!
-}
-
-type NounsBuilderAuctionAuctionBidEventProperties {
-  tokenId: String!
-  bidder: String!
-  amount: String!
-  amountPrice: PriceAtTime!
-  extended: Boolean!
-  endTime: String!
-}
-
-type NounsBuilderAuctionAuctionCreatedEventProperties {
-  tokenId: String!
-  startTime: String!
-  endTime: String!
-}
-
-type NounsBuilderAuctionAuctionSettledEventProperties {
-  tokenId: String!
-  winner: String!
-  amount: String!
-  amountPrice: PriceAtTime!
-}
-
-type NounsBuilderAuctionDurationUpdatedEventProperties {
-  duration: String!
-}
-
-type NounsBuilderAuctionEvent {
-  nounsBuilderAuctionEventType: NounsBuilderAuctionEventType!
-  address: String!
-  collectionAddress: String!
-  manager: String!
-  metadata: String!
-  auction: String!
-  timelock: String!
-  governor: String!
-  properties: NounsBuilderAuctionEventProperties!
-}
-
-union NounsBuilderAuctionEventProperties = NounsBuilderAuctionAuctionBidEventProperties | NounsBuilderAuctionAuctionCreatedEventProperties | NounsBuilderAuctionAuctionSettledEventProperties | NounsBuilderAuctionDurationUpdatedEventProperties | NounsBuilderAuctionMinBidIncrementPercentageUpdatedEventProperties | NounsBuilderAuctionReservePriceUpdatedEventProperties | NounsBuilderAuctionTimeBufferUpdatedEventProperties
-
-enum NounsBuilderAuctionEventType {
-  NOUNS_BUILDER_AUCTION_AUCTION_BID_EVENT
-  NOUNS_BUILDER_AUCTION_AUCTION_CREATED_EVENT
-  NOUNS_BUILDER_AUCTION_AUCTION_SETTLED_EVENT
-  NOUNS_BUILDER_AUCTION_DURATION_UPDATED_EVENT
-  NOUNS_BUILDER_AUCTION_MIN_BID_INCREMENT_PERCENTAGE_UPDATED_EVENT
-  NOUNS_BUILDER_AUCTION_RESERVE_PRICE_UPDATED_EVENT
-  NOUNS_BUILDER_AUCTION_TIME_BUFFER_UPDATED_EVENT
-}
-
-type NounsBuilderAuctionMinBidIncrementPercentageUpdatedEventProperties {
-  minBidIncrementPercentage: String!
-}
-
-type NounsBuilderAuctionReservePriceUpdatedEventProperties {
-  reserve: String!
-  reservePrice: PriceAtTime!
-}
-
-type NounsBuilderAuctionTimeBufferUpdatedEventProperties {
-  timeBuffer: String!
-}
-
-type NounsBuilderGovernorEvent {
-  nounsBuilderGovernorEventType: NounsBuilderGovernorEventType!
-  address: String!
-  collectionAddress: String!
-  properties: NounsBuilderGovernorProposalCreatedEventProperties!
-}
-
-enum NounsBuilderGovernorEventType {
-  NOUNS_BUILDER_GOVERNOR_PROPOSAL_CREATED_EVENT
-}
-
-type NounsBuilderGovernorProposalCreatedEventProperties {
-  proposalId: String!
-  proposer: String!
-  targets: [String!]!
-  values: [String!]!
-  signatures: [String!]!
-  calldatas: [String!]!
-  startBlock: String!
-  endBlock: String!
-  description: String!
-}
-
-type NounsBuilderManagerDaoDeployedEventProperties {
-  token: String!
-  auction: String!
-  timelock: String!
-  governor: String!
-  metadata: String!
-}
-
-type NounsBuilderManagerEvent {
-  nounsBuilderManagerEventType: NounsBuilderManagerEventType!
-  address: String!
-  properties: NounsBuilderManagerDaoDeployedEventProperties!
-}
-
-enum NounsBuilderManagerEventType {
-  NOUNS_BUILDER_MANAGER_DAO_DEPLOYED_EVENT
-}
-
-type NounsDao {
-  contractAddress: String!
-  collectionAddress: String!
-  auctionAddress: String!
-  timelockAddress: String!
-  governorAddress: String!
-  metadataAddress: String!
-  description: String
-  name: String
-  symbol: String
-  totalSupply: Int
-  networkInfo: NetworkInfo!
-}
-
-type NounsDaoWithEvents {
-  nounsDao: NounsDao!
-  events: [NounsEvent!]!
-}
-
-type NounsDaoWithEventsConnection {
-  nodes: [NounsDaoWithEvents!]!
-  pageInfo: PageInfo!
-}
-
-type NounsEvent {
-  networkInfo: NetworkInfo!
-  transactionInfo: TransactionInfo!
-  eventType: NounsEventType!
-  collectionAddress: String!
-  properties: NounsEventProperties!
-}
-
-union NounsEventProperties = NounsBuilderAuctionEvent | NounsBuilderManagerEvent | NounsBuilderGovernorEvent
-
-enum NounsEventType {
-  NOUNS_BUILDER_MANAGER_EVENT
-  NOUNS_BUILDER_GOVERNOR_EVENT
-  NOUNS_BUILDER_AUCTION_EVENT
-}
-
-input NounsQueryInput {
-  collectionAddresses: [String!] = null
-  memberAddresses: [String!] = null
-}
-
-enum NounsSortKey {
-  NONE
-  CREATED
-}
-
-input NounsSortKeySortInput {
-  sortKey: NounsSortKey!
-  sortDirection: SortDirection!
-}
-
-type OffchainOrder {
-  networkInfo: NetworkInfo!
-  contractAddress: String!
-  collectionAddress: String
-  tokenId: String
-  offerer: String!
-  startTime: datetime!
-  endTime: datetime!
-  orderType: String!
-  price: PriceAtTime!
-  properties: SeaportOrder!
-  calldata: String
-}
-
-enum OffchainOrderSortKey {
-  NONE
-  CHAIN_TOKEN_PRICE
-  NATIVE_PRICE
-  USDC_PRICE
-  END_TIME
-}
-
-input OffchainOrderSortKeySortInput {
-  sortKey: OffchainOrderSortKey!
-  sortDirection: SortDirection!
-}
-
-input OffchainOrdersQueryFilter {
-  priceFilter: PriceFilter = null
-}
-
-input OffchainOrdersQueryInput {
-  collectionAddresses: [String!] = null
-  sellerAddresses: [String!] = null
-  tokens: [TokenInput!] = null
-}
-
-type OffchainOrderWithToken {
-  offchainOrder: OffchainOrder!
-  token: Token
-}
-
-type OffchainOrderWithTokenConnection {
-  nodes: [OffchainOrderWithToken!]!
-  pageInfo: PageInfo!
+  network: Network! = CANTO
+  chain: Chain! = CANTO
 }
 
 type OwnerCount {
@@ -816,12 +440,6 @@ type RootQuery {
   """Historical minting data"""
   mints(networks: [NetworkInput!] = null, pagination: PaginationInput = null, sort: MintSortKeySortInput = null, filter: MintsQueryFilter = null, where: MintsQueryInput = null): MintWithTokenAndMarketsConnection!
 
-  """Noun daos"""
-  nouns(where: NounsQueryInput = null, sort: NounsSortKeySortInput = null, pagination: PaginationInput = null, networks: [NetworkInput!] = null): NounsDaoWithEventsConnection!
-
-  """Offchain liquidity"""
-  offchainOrders(where: OffchainOrdersQueryInput = null, networks: [NetworkInput!] = null, pagination: PaginationInput = null, sort: OffchainOrderSortKeySortInput = null, filter: OffchainOrdersQueryFilter = null): OffchainOrderWithTokenConnection!
-
   """Historical sales data from ZORA, OpenSea, LooksRare, 0x, and more"""
   sales(where: SalesQueryInput = null, networks: [NetworkInput!] = null, pagination: PaginationInput = null, sort: SaleSortKeySortInput = null, filter: SalesQueryFilter = null): SaleWithTokenConnection!
 
@@ -884,18 +502,6 @@ input SalesVolumeFilter {
 }
 
 enum SaleType {
-  FOUNDATION_SALE
-  NOUNS_AUCTION_SALE
-  LIL_NOUNS_AUCTION_SALE
-  CRYPTOPUNKS_SALE
-  LOOKS_RARE_SALE
-  OPENSEA_SINGLE_SALE
-  OPENSEA_BUNDLE_SALE
-  RARIBLE_SALE
-  SEAPORT_SALE
-  SUPERRARE_SALE
-  ZEROX_SALE
-  ZORA_V2_AUCTION_SALE
   ZORA_V3_ASK_SALE
   ZORA_V3_RESERVE_AUCTION_SALE
 }
@@ -908,64 +514,6 @@ type SaleWithToken {
 type SaleWithTokenConnection {
   nodes: [SaleWithToken!]!
   pageInfo: PageInfo!
-}
-
-type SeaportCounterIncrementedProperties {
-  newCounter: String!
-}
-
-type SeaportEvent {
-  address: String!
-  eventType: SeaportEventType!
-  offerer: String!
-  orderHash: String
-  zone: String
-  properties: SeaportEventProperties
-}
-
-union SeaportEventProperties = SeaportOrderFulfilledProperties | SeaportCounterIncrementedProperties
-
-enum SeaportEventType {
-  SEAPORT_COUNTER_INCREMENTED_EVENT
-  SEAPORT_ORDER_CANCELLED_EVENT
-  SEAPORT_ORDER_FULFILLED_EVENT
-  SEAPORT_ORDER_VALIDATED_EVENT
-}
-
-type SeaportOrder {
-  orderHash: String!
-  offerer: String!
-  startTime: datetime!
-  endTime: datetime!
-  orderType: String!
-  price: PriceAtTime!
-  offers: [SeaportOrderItem!]!
-  considerations: [SeaportOrderItem!]!
-  zone: String!
-  zoneHash: String!
-  salt: String!
-  conduitKey: String!
-  counter: String!
-  signature: String!
-  schemaHash: String!
-}
-
-type SeaportOrderFulfilledProperties {
-  recipient: String!
-  offer: [SpentItem!]!
-  consideration: [ReceivedItem!]!
-}
-
-type SeaportOrderItem {
-  itemType: String!
-  address: String!
-  tokenId: String
-  criteria: String
-  startAmount: String!
-  endAmount: String!
-  startPrice: PriceAtTime
-  endPrice: PriceAtTime
-  recipient: String
 }
 
 enum SearchableEntity {
@@ -1141,188 +689,6 @@ type TransferEvent {
 
 type UnsupportedEncodingTypes {
   original: String!
-}
-
-type V1Ask {
-  v1AskStatus: String!
-  address: String!
-  collectionAddress: String!
-  tokenId: String!
-  amount: PriceAtTime!
-  currency: String!
-  tokenOwner: String
-}
-
-type V1BidShare {
-  v1BidShareStatus: String!
-  address: String!
-  collectionAddress: String!
-  tokenId: String!
-  previousOwner: String!
-  creator: String!
-  owner: String!
-}
-
-type V1MarketAskCreatedEventProperties {
-  amount: String!
-  price: PriceAtTime!
-  currency: String!
-}
-
-type V1MarketAskRemovedEventProperties {
-  amount: String!
-  price: PriceAtTime!
-  currency: String!
-}
-
-type V1MarketBidShareUpdatedEventProperties {
-  previousOwner: String!
-  creator: String!
-  owner: String!
-}
-
-type V1MarketEvent {
-  v1MarketEventType: V1MarketEventType!
-  address: String!
-  collectionAddress: String!
-  tokenId: String!
-  properties: V1MarketEventProperties!
-}
-
-union V1MarketEventProperties = V1MarketAskCreatedEventProperties | V1MarketAskRemovedEventProperties | V1MarketOfferCreatedEventProperties | V1MarketOfferFinalizedEventProperties | V1MarketOfferRemovedEventProperties | V1MarketBidShareUpdatedEventProperties
-
-enum V1MarketEventType {
-  V1_MARKET_BID_CREATED
-  V1_MARKET_BID_REMOVED
-  V1_MARKET_BID_FINALIZED
-  V1_MARKET_ASK_CREATED
-  V1_MARKET_ASK_REMOVED
-  V1_MARKET_BID_SHARE_UPDATED
-}
-
-type V1MarketOfferCreatedEventProperties {
-  amount: String!
-  price: PriceAtTime!
-  currency: String!
-  bidder: String!
-  recipient: String!
-  sellOnShare: String!
-}
-
-type V1MarketOfferFinalizedEventProperties {
-  amount: String!
-  price: PriceAtTime!
-  currency: String!
-  bidder: String!
-  recipient: String!
-  sellOnShare: String!
-}
-
-type V1MarketOfferRemovedEventProperties {
-  amount: String!
-  price: PriceAtTime!
-  currency: String!
-  bidder: String!
-  recipient: String!
-  sellOnShare: String!
-}
-
-type V1Offer {
-  v1OfferStatus: String!
-  address: String!
-  collectionAddress: String!
-  tokenId: String!
-  amount: PriceAtTime!
-  currency: String!
-  bidder: String!
-  recipient: String!
-  sellOnShare: String!
-}
-
-type V2Auction {
-  v2AuctionStatus: String!
-  address: String!
-  tokenId: String!
-  collectionAddress: String!
-  auctionId: String!
-  approved: Boolean!
-  auctionCurrency: String!
-  highestBidPrice: PriceAtTime
-  duration: String!
-  firstBidTime: datetime
-  reservePrice: PriceAtTime!
-  curatorFeePercentage: Int!
-  tokenOwner: String!
-  highestBidder: String
-  curator: String!
-  estimatedExpirationTime: datetime
-  amountCuratorReceived: PriceAtTime
-  amountTokenOwnerReceived: PriceAtTime
-}
-
-type V2AuctionApprovalUpdatedEventProperties {
-  approved: Boolean!
-}
-
-type V2AuctionBidEventProperties {
-  sender: String!
-  firstBid: Boolean!
-  extended: Boolean!
-  value: String!
-  price: PriceAtTime!
-}
-
-type V2AuctionCanceledEventProperties {
-  tokenOwner: String!
-}
-
-type V2AuctionCreatedEventProperties {
-  auctionCurrency: String!
-  tokenOwner: String!
-  curator: String!
-  curatorFeePercentage: Int!
-  duration: String!
-  reservePrice: String!
-  price: PriceAtTime!
-}
-
-type V2AuctionDurationExtendedEventProperties {
-  duration: String!
-}
-
-type V2AuctionEndedEventProperties {
-  tokenOwner: String!
-  curator: String!
-  winner: String!
-  auctionCurrency: String!
-  amount: String!
-  curatorFee: String!
-}
-
-type V2AuctionEvent {
-  v2AuctionEventType: V2AuctionEventType!
-  address: String!
-  auctionId: Int!
-  collectionAddress: String!
-  tokenId: String!
-  properties: V2AuctionEventProperties!
-}
-
-union V2AuctionEventProperties = V2AuctionBidEventProperties | V2AuctionCreatedEventProperties | V2AuctionCanceledEventProperties | V2AuctionDurationExtendedEventProperties | V2AuctionEndedEventProperties | V2AuctionReservePriceUpdatedEventProperties | V2AuctionApprovalUpdatedEventProperties
-
-enum V2AuctionEventType {
-  V2_AUCTION_CREATED
-  V2_AUCTION_CANCELED
-  V2_AUCTION_RESERVE_PRICE_UPDATED
-  V2_AUCTION_BID
-  V2_AUCTION_DURATION_EXTENDED
-  V2_AUCTION_APPROVAL_UPDATED
-  V2_AUCTION_ENDED
-}
-
-type V2AuctionReservePriceUpdatedEventProperties {
-  reservePrice: String!
-  price: PriceAtTime!
 }
 
 type V3Ask {

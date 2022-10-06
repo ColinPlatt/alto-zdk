@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.22.0",
-    "@graphql-codegen/cli": "2.5.0",
+    "@graphql-codegen/cli": "^2.13.5",
     "@graphql-codegen/typescript": "2.4.3",
     "@graphql-codegen/typescript-graphql-request": "4.3.4",
     "@graphql-codegen/typescript-operations": "2.2.4",
@@ -60,7 +60,7 @@
   },
   "dependencies": {
     "big.js": "^6.1.0",
-    "graphql": "^16.5.0",
+    "graphql": "^16.6.0",
     "graphql-request": "^4.2.0",
     "graphql-tag": "^2.12.6",
     "tslib": "^2.2.0"

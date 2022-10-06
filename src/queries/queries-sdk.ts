@@ -31,7 +31,7 @@ export type ActiveMarket = {
   transactionInfo: TransactionInfo;
 };
 
-export type ActiveMarketProperties = LilNounsAuction | NounsAuction | V2Auction | V3ReserveAuction;
+export type ActiveMarketProperties = V3ReserveAuction;
 
 export type ActiveMarketQueryInput = {
   marketType: ActiveMarketType;
@@ -39,9 +39,6 @@ export type ActiveMarketQueryInput = {
 };
 
 export enum ActiveMarketType {
-  ActiveLilNounsAuction = 'ACTIVE_LIL_NOUNS_AUCTION',
-  ActiveNounsAuction = 'ACTIVE_NOUNS_AUCTION',
-  ActiveV2Auction = 'ACTIVE_V2_AUCTION',
   ActiveV3ReserveAuction = 'ACTIVE_V3_RESERVE_AUCTION'
 }
 
@@ -132,9 +129,7 @@ export type AudioEncodingTypes = {
 };
 
 export enum Chain {
-  Goerli = 'GOERLI',
-  Mainnet = 'MAINNET',
-  Rinkeby = 'RINKEBY'
+  Canto = 'CANTO'
 }
 
 export type Collection = {
@@ -223,7 +218,7 @@ export type EventConnection = {
   pageInfo: PageInfo;
 };
 
-export type EventProperties = ApprovalEvent | LilNounsAuctionEvent | MintEvent | NounsAuctionEvent | Sale | SeaportEvent | TransferEvent | V1MarketEvent | V2AuctionEvent | V3AskEvent | V3ReserveAuctionEvent;
+export type EventProperties = ApprovalEvent | MintEvent | Sale | TransferEvent | V3AskEvent | V3ReserveAuctionEvent;
 
 export enum EventSortKey {
   Created = 'CREATED'
@@ -236,14 +231,9 @@ export type EventSortKeySortInput = {
 
 export enum EventType {
   ApprovalEvent = 'APPROVAL_EVENT',
-  LilNounsAuctionEvent = 'LIL_NOUNS_AUCTION_EVENT',
   MintEvent = 'MINT_EVENT',
-  NounsAuctionEvent = 'NOUNS_AUCTION_EVENT',
   SaleEvent = 'SALE_EVENT',
-  SeaportEvent = 'SEAPORT_EVENT',
   TransferEvent = 'TRANSFER_EVENT',
-  V1MarketEvent = 'V1_MARKET_EVENT',
-  V2AuctionEvent = 'V2_AUCTION_EVENT',
   V3AskEvent = 'V3_ASK_EVENT',
   V3ReserveAuctionEvent = 'V3_RESERVE_AUCTION_EVENT'
 }
@@ -272,92 +262,6 @@ export type ImageEncodingTypes = {
 
 export type ImageEncodingTypesVideoEncodingTypesAudioEncodingTypesUnsupportedEncodingTypes = AudioEncodingTypes | ImageEncodingTypes | UnsupportedEncodingTypes | VideoEncodingTypes;
 
-export type LilNounsAuction = {
-  __typename?: 'LilNounsAuction';
-  address: Scalars['String'];
-  amount?: Maybe<PriceAtTime>;
-  auctionCurrency: Scalars['String'];
-  auctionId: Scalars['String'];
-  collectionAddress: Scalars['String'];
-  duration: Scalars['String'];
-  endTime: Scalars['String'];
-  estimatedDurationTime?: Maybe<Scalars['datetime']>;
-  firstBidTime?: Maybe<Scalars['datetime']>;
-  highestBidPrice?: Maybe<PriceAtTime>;
-  highestBidder?: Maybe<Scalars['String']>;
-  minBidIncrementPercentage?: Maybe<Scalars['Int']>;
-  reservePrice?: Maybe<PriceAtTime>;
-  startTime: Scalars['String'];
-  timeBuffer?: Maybe<Scalars['Int']>;
-  tokenId: Scalars['String'];
-  winner?: Maybe<Scalars['String']>;
-};
-
-export type LilNounsAuctionBidEventProperties = {
-  __typename?: 'LilNounsAuctionBidEventProperties';
-  extended: Scalars['Boolean'];
-  lilNounId: Scalars['String'];
-  sender: Scalars['String'];
-  value: Scalars['String'];
-};
-
-export type LilNounsAuctionCreatedEventProperties = {
-  __typename?: 'LilNounsAuctionCreatedEventProperties';
-  endTime: Scalars['String'];
-  lilNounId: Scalars['String'];
-  startTime: Scalars['String'];
-};
-
-export type LilNounsAuctionEvent = {
-  __typename?: 'LilNounsAuctionEvent';
-  address: Scalars['String'];
-  collectionAddress: Scalars['String'];
-  lilNounsAuctionEventType: LilNounsAuctionEventType;
-  properties: LilNounsAuctionEventProperties;
-  tokenId: Scalars['String'];
-};
-
-export type LilNounsAuctionEventProperties = LilNounsAuctionBidEventProperties | LilNounsAuctionCreatedEventProperties | LilNounsAuctionExtendedEventProperties | LilNounsAuctionMinBidIncrementPercentageUpdatedEventProperties | LilNounsAuctionReservePriceUpdatedEventProperties | LilNounsAuctionSettledEventProperties | LilNounsAuctionTimeBufferUpdatedEventProperties;
-
-export enum LilNounsAuctionEventType {
-  LilNounsAuctionHouseAuctionBidEvent = 'LIL_NOUNS_AUCTION_HOUSE_AUCTION_BID_EVENT',
-  LilNounsAuctionHouseAuctionCreatedEvent = 'LIL_NOUNS_AUCTION_HOUSE_AUCTION_CREATED_EVENT',
-  LilNounsAuctionHouseAuctionExtendedEvent = 'LIL_NOUNS_AUCTION_HOUSE_AUCTION_EXTENDED_EVENT',
-  LilNounsAuctionHouseAuctionMinBidIncrementPercentageUpdated = 'LIL_NOUNS_AUCTION_HOUSE_AUCTION_MIN_BID_INCREMENT_PERCENTAGE_UPDATED',
-  LilNounsAuctionHouseAuctionReservePriceUpdatedEvent = 'LIL_NOUNS_AUCTION_HOUSE_AUCTION_RESERVE_PRICE_UPDATED_EVENT',
-  LilNounsAuctionHouseAuctionSettledEvent = 'LIL_NOUNS_AUCTION_HOUSE_AUCTION_SETTLED_EVENT',
-  LilNounsAuctionHouseAuctionTimeBufferUpdatedEvent = 'LIL_NOUNS_AUCTION_HOUSE_AUCTION_TIME_BUFFER_UPDATED_EVENT'
-}
-
-export type LilNounsAuctionExtendedEventProperties = {
-  __typename?: 'LilNounsAuctionExtendedEventProperties';
-  endTime: Scalars['String'];
-  lilNounId: Scalars['String'];
-};
-
-export type LilNounsAuctionMinBidIncrementPercentageUpdatedEventProperties = {
-  __typename?: 'LilNounsAuctionMinBidIncrementPercentageUpdatedEventProperties';
-  minBidIncrementPercentage: Scalars['String'];
-};
-
-export type LilNounsAuctionReservePriceUpdatedEventProperties = {
-  __typename?: 'LilNounsAuctionReservePriceUpdatedEventProperties';
-  reservePrice: Scalars['String'];
-};
-
-export type LilNounsAuctionSettledEventProperties = {
-  __typename?: 'LilNounsAuctionSettledEventProperties';
-  amount: Scalars['String'];
-  lilNounId: Scalars['String'];
-  price: PriceAtTime;
-  winner: Scalars['String'];
-};
-
-export type LilNounsAuctionTimeBufferUpdatedEventProperties = {
-  __typename?: 'LilNounsAuctionTimeBufferUpdatedEventProperties';
-  timeBuffer: Scalars['String'];
-};
-
 export type Market = {
   __typename?: 'Market';
   collectionAddress?: Maybe<Scalars['String']>;
@@ -377,7 +281,7 @@ export enum MarketCategory {
   Offer = 'OFFER'
 }
 
-export type MarketProperties = LilNounsAuction | NounsAuction | V1Ask | V1BidShare | V1Offer | V2Auction | V3Ask | V3ReserveAuction;
+export type MarketProperties = V3Ask | V3ReserveAuction;
 
 export enum MarketSortKey {
   ChainTokenPrice = 'CHAIN_TOKEN_PRICE',
@@ -400,12 +304,6 @@ export enum MarketStatus {
 }
 
 export enum MarketType {
-  LilNounsAuction = 'LIL_NOUNS_AUCTION',
-  NounsAuction = 'NOUNS_AUCTION',
-  V1Ask = 'V1_ASK',
-  V1BidShare = 'V1_BID_SHARE',
-  V1Offer = 'V1_OFFER',
-  V2Auction = 'V2_AUCTION',
   V3Ask = 'V3_ASK',
   V3ReserveAuction = 'V3_RESERVE_AUCTION'
 }
@@ -520,7 +418,7 @@ export type MintsQueryInput = {
 };
 
 export enum Network {
-  Ethereum = 'ETHEREUM'
+  Canto = 'CANTO'
 }
 
 export type NetworkInfo = {
@@ -532,317 +430,6 @@ export type NetworkInfo = {
 export type NetworkInput = {
   chain?: Chain;
   network?: Network;
-};
-
-export type NounsAuction = {
-  __typename?: 'NounsAuction';
-  address: Scalars['String'];
-  amount?: Maybe<PriceAtTime>;
-  auctionCurrency: Scalars['String'];
-  auctionId: Scalars['String'];
-  collectionAddress: Scalars['String'];
-  duration: Scalars['String'];
-  endTime: Scalars['String'];
-  estimatedDurationTime?: Maybe<Scalars['datetime']>;
-  firstBidTime?: Maybe<Scalars['datetime']>;
-  highestBidPrice?: Maybe<PriceAtTime>;
-  highestBidder?: Maybe<Scalars['String']>;
-  minBidIncrementPercentage?: Maybe<Scalars['Int']>;
-  reservePrice?: Maybe<PriceAtTime>;
-  startTime: Scalars['String'];
-  timeBuffer?: Maybe<Scalars['Int']>;
-  tokenId: Scalars['String'];
-  winner?: Maybe<Scalars['String']>;
-};
-
-export type NounsAuctionBidEventProperties = {
-  __typename?: 'NounsAuctionBidEventProperties';
-  extended: Scalars['Boolean'];
-  nounId: Scalars['String'];
-  sender: Scalars['String'];
-  value: Scalars['String'];
-};
-
-export type NounsAuctionCreatedEventProperties = {
-  __typename?: 'NounsAuctionCreatedEventProperties';
-  endTime: Scalars['String'];
-  nounId: Scalars['String'];
-  startTime: Scalars['String'];
-};
-
-export type NounsAuctionEvent = {
-  __typename?: 'NounsAuctionEvent';
-  address: Scalars['String'];
-  collectionAddress: Scalars['String'];
-  nounsAuctionEventType: NounsAuctionEventType;
-  properties: NounsAuctionEventProperties;
-  tokenId: Scalars['String'];
-};
-
-export type NounsAuctionEventProperties = NounsAuctionBidEventProperties | NounsAuctionCreatedEventProperties | NounsAuctionExtendedEventProperties | NounsAuctionMinBidIncrementPercentageUpdatedEventProperties | NounsAuctionReservePriceUpdatedEventProperties | NounsAuctionSettledEventProperties | NounsAuctionTimeBufferUpdatedEventProperties;
-
-export enum NounsAuctionEventType {
-  NounsAuctionHouseAuctionBidEvent = 'NOUNS_AUCTION_HOUSE_AUCTION_BID_EVENT',
-  NounsAuctionHouseAuctionCreatedEvent = 'NOUNS_AUCTION_HOUSE_AUCTION_CREATED_EVENT',
-  NounsAuctionHouseAuctionExtendedEvent = 'NOUNS_AUCTION_HOUSE_AUCTION_EXTENDED_EVENT',
-  NounsAuctionHouseAuctionMinBidIncrementPercentageUpdated = 'NOUNS_AUCTION_HOUSE_AUCTION_MIN_BID_INCREMENT_PERCENTAGE_UPDATED',
-  NounsAuctionHouseAuctionReservePriceUpdatedEvent = 'NOUNS_AUCTION_HOUSE_AUCTION_RESERVE_PRICE_UPDATED_EVENT',
-  NounsAuctionHouseAuctionSettledEvent = 'NOUNS_AUCTION_HOUSE_AUCTION_SETTLED_EVENT',
-  NounsAuctionHouseAuctionTimeBufferUpdatedEvent = 'NOUNS_AUCTION_HOUSE_AUCTION_TIME_BUFFER_UPDATED_EVENT'
-}
-
-export type NounsAuctionExtendedEventProperties = {
-  __typename?: 'NounsAuctionExtendedEventProperties';
-  endTime: Scalars['String'];
-  nounId: Scalars['String'];
-};
-
-export type NounsAuctionMinBidIncrementPercentageUpdatedEventProperties = {
-  __typename?: 'NounsAuctionMinBidIncrementPercentageUpdatedEventProperties';
-  minBidIncrementPercentage: Scalars['String'];
-};
-
-export type NounsAuctionReservePriceUpdatedEventProperties = {
-  __typename?: 'NounsAuctionReservePriceUpdatedEventProperties';
-  reservePrice: Scalars['String'];
-};
-
-export type NounsAuctionSettledEventProperties = {
-  __typename?: 'NounsAuctionSettledEventProperties';
-  amount: Scalars['String'];
-  nounId: Scalars['String'];
-  price: PriceAtTime;
-  winner: Scalars['String'];
-};
-
-export type NounsAuctionTimeBufferUpdatedEventProperties = {
-  __typename?: 'NounsAuctionTimeBufferUpdatedEventProperties';
-  timeBuffer: Scalars['String'];
-};
-
-export type NounsBuilderAuctionAuctionBidEventProperties = {
-  __typename?: 'NounsBuilderAuctionAuctionBidEventProperties';
-  amount: Scalars['String'];
-  amountPrice: PriceAtTime;
-  bidder: Scalars['String'];
-  endTime: Scalars['String'];
-  extended: Scalars['Boolean'];
-  tokenId: Scalars['String'];
-};
-
-export type NounsBuilderAuctionAuctionCreatedEventProperties = {
-  __typename?: 'NounsBuilderAuctionAuctionCreatedEventProperties';
-  endTime: Scalars['String'];
-  startTime: Scalars['String'];
-  tokenId: Scalars['String'];
-};
-
-export type NounsBuilderAuctionAuctionSettledEventProperties = {
-  __typename?: 'NounsBuilderAuctionAuctionSettledEventProperties';
-  amount: Scalars['String'];
-  amountPrice: PriceAtTime;
-  tokenId: Scalars['String'];
-  winner: Scalars['String'];
-};
-
-export type NounsBuilderAuctionDurationUpdatedEventProperties = {
-  __typename?: 'NounsBuilderAuctionDurationUpdatedEventProperties';
-  duration: Scalars['String'];
-};
-
-export type NounsBuilderAuctionEvent = {
-  __typename?: 'NounsBuilderAuctionEvent';
-  address: Scalars['String'];
-  auction: Scalars['String'];
-  collectionAddress: Scalars['String'];
-  governor: Scalars['String'];
-  manager: Scalars['String'];
-  metadata: Scalars['String'];
-  nounsBuilderAuctionEventType: NounsBuilderAuctionEventType;
-  properties: NounsBuilderAuctionEventProperties;
-  timelock: Scalars['String'];
-};
-
-export type NounsBuilderAuctionEventProperties = NounsBuilderAuctionAuctionBidEventProperties | NounsBuilderAuctionAuctionCreatedEventProperties | NounsBuilderAuctionAuctionSettledEventProperties | NounsBuilderAuctionDurationUpdatedEventProperties | NounsBuilderAuctionMinBidIncrementPercentageUpdatedEventProperties | NounsBuilderAuctionReservePriceUpdatedEventProperties | NounsBuilderAuctionTimeBufferUpdatedEventProperties;
-
-export enum NounsBuilderAuctionEventType {
-  NounsBuilderAuctionAuctionBidEvent = 'NOUNS_BUILDER_AUCTION_AUCTION_BID_EVENT',
-  NounsBuilderAuctionAuctionCreatedEvent = 'NOUNS_BUILDER_AUCTION_AUCTION_CREATED_EVENT',
-  NounsBuilderAuctionAuctionSettledEvent = 'NOUNS_BUILDER_AUCTION_AUCTION_SETTLED_EVENT',
-  NounsBuilderAuctionDurationUpdatedEvent = 'NOUNS_BUILDER_AUCTION_DURATION_UPDATED_EVENT',
-  NounsBuilderAuctionMinBidIncrementPercentageUpdatedEvent = 'NOUNS_BUILDER_AUCTION_MIN_BID_INCREMENT_PERCENTAGE_UPDATED_EVENT',
-  NounsBuilderAuctionReservePriceUpdatedEvent = 'NOUNS_BUILDER_AUCTION_RESERVE_PRICE_UPDATED_EVENT',
-  NounsBuilderAuctionTimeBufferUpdatedEvent = 'NOUNS_BUILDER_AUCTION_TIME_BUFFER_UPDATED_EVENT'
-}
-
-export type NounsBuilderAuctionMinBidIncrementPercentageUpdatedEventProperties = {
-  __typename?: 'NounsBuilderAuctionMinBidIncrementPercentageUpdatedEventProperties';
-  minBidIncrementPercentage: Scalars['String'];
-};
-
-export type NounsBuilderAuctionReservePriceUpdatedEventProperties = {
-  __typename?: 'NounsBuilderAuctionReservePriceUpdatedEventProperties';
-  reserve: Scalars['String'];
-  reservePrice: PriceAtTime;
-};
-
-export type NounsBuilderAuctionTimeBufferUpdatedEventProperties = {
-  __typename?: 'NounsBuilderAuctionTimeBufferUpdatedEventProperties';
-  timeBuffer: Scalars['String'];
-};
-
-export type NounsBuilderGovernorEvent = {
-  __typename?: 'NounsBuilderGovernorEvent';
-  address: Scalars['String'];
-  collectionAddress: Scalars['String'];
-  nounsBuilderGovernorEventType: NounsBuilderGovernorEventType;
-  properties: NounsBuilderGovernorProposalCreatedEventProperties;
-};
-
-export enum NounsBuilderGovernorEventType {
-  NounsBuilderGovernorProposalCreatedEvent = 'NOUNS_BUILDER_GOVERNOR_PROPOSAL_CREATED_EVENT'
-}
-
-export type NounsBuilderGovernorProposalCreatedEventProperties = {
-  __typename?: 'NounsBuilderGovernorProposalCreatedEventProperties';
-  calldatas: Array<Scalars['String']>;
-  description: Scalars['String'];
-  endBlock: Scalars['String'];
-  proposalId: Scalars['String'];
-  proposer: Scalars['String'];
-  signatures: Array<Scalars['String']>;
-  startBlock: Scalars['String'];
-  targets: Array<Scalars['String']>;
-  values: Array<Scalars['String']>;
-};
-
-export type NounsBuilderManagerDaoDeployedEventProperties = {
-  __typename?: 'NounsBuilderManagerDaoDeployedEventProperties';
-  auction: Scalars['String'];
-  governor: Scalars['String'];
-  metadata: Scalars['String'];
-  timelock: Scalars['String'];
-  token: Scalars['String'];
-};
-
-export type NounsBuilderManagerEvent = {
-  __typename?: 'NounsBuilderManagerEvent';
-  address: Scalars['String'];
-  nounsBuilderManagerEventType: NounsBuilderManagerEventType;
-  properties: NounsBuilderManagerDaoDeployedEventProperties;
-};
-
-export enum NounsBuilderManagerEventType {
-  NounsBuilderManagerDaoDeployedEvent = 'NOUNS_BUILDER_MANAGER_DAO_DEPLOYED_EVENT'
-}
-
-export type NounsDao = {
-  __typename?: 'NounsDao';
-  auctionAddress: Scalars['String'];
-  collectionAddress: Scalars['String'];
-  contractAddress: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
-  governorAddress: Scalars['String'];
-  metadataAddress: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
-  networkInfo: NetworkInfo;
-  symbol?: Maybe<Scalars['String']>;
-  timelockAddress: Scalars['String'];
-  totalSupply?: Maybe<Scalars['Int']>;
-};
-
-export type NounsDaoWithEvents = {
-  __typename?: 'NounsDaoWithEvents';
-  events: Array<NounsEvent>;
-  nounsDao: NounsDao;
-};
-
-export type NounsDaoWithEventsConnection = {
-  __typename?: 'NounsDaoWithEventsConnection';
-  nodes: Array<NounsDaoWithEvents>;
-  pageInfo: PageInfo;
-};
-
-export type NounsEvent = {
-  __typename?: 'NounsEvent';
-  collectionAddress: Scalars['String'];
-  eventType: NounsEventType;
-  networkInfo: NetworkInfo;
-  properties: NounsEventProperties;
-  transactionInfo: TransactionInfo;
-};
-
-export type NounsEventProperties = NounsBuilderAuctionEvent | NounsBuilderGovernorEvent | NounsBuilderManagerEvent;
-
-export enum NounsEventType {
-  NounsBuilderAuctionEvent = 'NOUNS_BUILDER_AUCTION_EVENT',
-  NounsBuilderGovernorEvent = 'NOUNS_BUILDER_GOVERNOR_EVENT',
-  NounsBuilderManagerEvent = 'NOUNS_BUILDER_MANAGER_EVENT'
-}
-
-export type NounsQueryInput = {
-  collectionAddresses?: InputMaybe<Array<Scalars['String']>>;
-  memberAddresses?: InputMaybe<Array<Scalars['String']>>;
-};
-
-export enum NounsSortKey {
-  Created = 'CREATED',
-  None = 'NONE'
-}
-
-export type NounsSortKeySortInput = {
-  sortDirection: SortDirection;
-  sortKey: NounsSortKey;
-};
-
-export type OffchainOrder = {
-  __typename?: 'OffchainOrder';
-  calldata?: Maybe<Scalars['String']>;
-  collectionAddress?: Maybe<Scalars['String']>;
-  contractAddress: Scalars['String'];
-  endTime: Scalars['datetime'];
-  networkInfo: NetworkInfo;
-  offerer: Scalars['String'];
-  orderType: Scalars['String'];
-  price: PriceAtTime;
-  properties: SeaportOrder;
-  startTime: Scalars['datetime'];
-  tokenId?: Maybe<Scalars['String']>;
-};
-
-export enum OffchainOrderSortKey {
-  ChainTokenPrice = 'CHAIN_TOKEN_PRICE',
-  EndTime = 'END_TIME',
-  NativePrice = 'NATIVE_PRICE',
-  None = 'NONE',
-  UsdcPrice = 'USDC_PRICE'
-}
-
-export type OffchainOrderSortKeySortInput = {
-  sortDirection: SortDirection;
-  sortKey: OffchainOrderSortKey;
-};
-
-export type OffchainOrderWithToken = {
-  __typename?: 'OffchainOrderWithToken';
-  offchainOrder: OffchainOrder;
-  token?: Maybe<Token>;
-};
-
-export type OffchainOrderWithTokenConnection = {
-  __typename?: 'OffchainOrderWithTokenConnection';
-  nodes: Array<OffchainOrderWithToken>;
-  pageInfo: PageInfo;
-};
-
-export type OffchainOrdersQueryFilter = {
-  priceFilter?: InputMaybe<PriceFilter>;
-};
-
-export type OffchainOrdersQueryInput = {
-  collectionAddresses?: InputMaybe<Array<Scalars['String']>>;
-  sellerAddresses?: InputMaybe<Array<Scalars['String']>>;
-  tokens?: InputMaybe<Array<TokenInput>>;
 };
 
 export type OwnerCount = {
@@ -918,10 +505,6 @@ export type RootQuery = {
   markets: MarketWithTokenConnection;
   /** Historical minting data */
   mints: MintWithTokenAndMarketsConnection;
-  /** Noun daos */
-  nouns: NounsDaoWithEventsConnection;
-  /** Offchain liquidity */
-  offchainOrders: OffchainOrderWithTokenConnection;
   /** Historical sales data from ZORA, OpenSea, LooksRare, 0x, and more */
   sales: SaleWithTokenConnection;
   /** Returns search results for a query */
@@ -977,23 +560,6 @@ export type RootQueryMintsArgs = {
   pagination?: InputMaybe<PaginationInput>;
   sort?: InputMaybe<MintSortKeySortInput>;
   where?: InputMaybe<MintsQueryInput>;
-};
-
-
-export type RootQueryNounsArgs = {
-  networks?: InputMaybe<Array<NetworkInput>>;
-  pagination?: InputMaybe<PaginationInput>;
-  sort?: InputMaybe<NounsSortKeySortInput>;
-  where?: InputMaybe<NounsQueryInput>;
-};
-
-
-export type RootQueryOffchainOrdersArgs = {
-  filter?: InputMaybe<OffchainOrdersQueryFilter>;
-  networks?: InputMaybe<Array<NetworkInput>>;
-  pagination?: InputMaybe<PaginationInput>;
-  sort?: InputMaybe<OffchainOrderSortKeySortInput>;
-  where?: InputMaybe<OffchainOrdersQueryInput>;
 };
 
 
@@ -1053,18 +619,6 @@ export type SaleSortKeySortInput = {
 };
 
 export enum SaleType {
-  CryptopunksSale = 'CRYPTOPUNKS_SALE',
-  FoundationSale = 'FOUNDATION_SALE',
-  LilNounsAuctionSale = 'LIL_NOUNS_AUCTION_SALE',
-  LooksRareSale = 'LOOKS_RARE_SALE',
-  NounsAuctionSale = 'NOUNS_AUCTION_SALE',
-  OpenseaBundleSale = 'OPENSEA_BUNDLE_SALE',
-  OpenseaSingleSale = 'OPENSEA_SINGLE_SALE',
-  RaribleSale = 'RARIBLE_SALE',
-  SeaportSale = 'SEAPORT_SALE',
-  SuperrareSale = 'SUPERRARE_SALE',
-  ZeroxSale = 'ZEROX_SALE',
-  ZoraV2AuctionSale = 'ZORA_V2_AUCTION_SALE',
   ZoraV3AskSale = 'ZORA_V3_ASK_SALE',
   ZoraV3ReserveAuctionSale = 'ZORA_V3_RESERVE_AUCTION_SALE'
 }
@@ -1104,69 +658,6 @@ export type SalesVolume = {
 export type SalesVolumeFilter = {
   saleTypes?: InputMaybe<Array<SaleType>>;
   timeFilter?: InputMaybe<TimeFilter>;
-};
-
-export type SeaportCounterIncrementedProperties = {
-  __typename?: 'SeaportCounterIncrementedProperties';
-  newCounter: Scalars['String'];
-};
-
-export type SeaportEvent = {
-  __typename?: 'SeaportEvent';
-  address: Scalars['String'];
-  eventType: SeaportEventType;
-  offerer: Scalars['String'];
-  orderHash?: Maybe<Scalars['String']>;
-  properties?: Maybe<SeaportEventProperties>;
-  zone?: Maybe<Scalars['String']>;
-};
-
-export type SeaportEventProperties = SeaportCounterIncrementedProperties | SeaportOrderFulfilledProperties;
-
-export enum SeaportEventType {
-  SeaportCounterIncrementedEvent = 'SEAPORT_COUNTER_INCREMENTED_EVENT',
-  SeaportOrderCancelledEvent = 'SEAPORT_ORDER_CANCELLED_EVENT',
-  SeaportOrderFulfilledEvent = 'SEAPORT_ORDER_FULFILLED_EVENT',
-  SeaportOrderValidatedEvent = 'SEAPORT_ORDER_VALIDATED_EVENT'
-}
-
-export type SeaportOrder = {
-  __typename?: 'SeaportOrder';
-  conduitKey: Scalars['String'];
-  considerations: Array<SeaportOrderItem>;
-  counter: Scalars['String'];
-  endTime: Scalars['datetime'];
-  offerer: Scalars['String'];
-  offers: Array<SeaportOrderItem>;
-  orderHash: Scalars['String'];
-  orderType: Scalars['String'];
-  price: PriceAtTime;
-  salt: Scalars['String'];
-  schemaHash: Scalars['String'];
-  signature: Scalars['String'];
-  startTime: Scalars['datetime'];
-  zone: Scalars['String'];
-  zoneHash: Scalars['String'];
-};
-
-export type SeaportOrderFulfilledProperties = {
-  __typename?: 'SeaportOrderFulfilledProperties';
-  consideration: Array<ReceivedItem>;
-  offer: Array<SpentItem>;
-  recipient: Scalars['String'];
-};
-
-export type SeaportOrderItem = {
-  __typename?: 'SeaportOrderItem';
-  address: Scalars['String'];
-  criteria?: Maybe<Scalars['String']>;
-  endAmount: Scalars['String'];
-  endPrice?: Maybe<PriceAtTime>;
-  itemType: Scalars['String'];
-  recipient?: Maybe<Scalars['String']>;
-  startAmount: Scalars['String'];
-  startPrice?: Maybe<PriceAtTime>;
-  tokenId?: Maybe<Scalars['String']>;
 };
 
 export type SearchFilter = {
@@ -1389,207 +880,6 @@ export type TransferEvent = {
 export type UnsupportedEncodingTypes = {
   __typename?: 'UnsupportedEncodingTypes';
   original: Scalars['String'];
-};
-
-export type V1Ask = {
-  __typename?: 'V1Ask';
-  address: Scalars['String'];
-  amount: PriceAtTime;
-  collectionAddress: Scalars['String'];
-  currency: Scalars['String'];
-  tokenId: Scalars['String'];
-  tokenOwner?: Maybe<Scalars['String']>;
-  v1AskStatus: Scalars['String'];
-};
-
-export type V1BidShare = {
-  __typename?: 'V1BidShare';
-  address: Scalars['String'];
-  collectionAddress: Scalars['String'];
-  creator: Scalars['String'];
-  owner: Scalars['String'];
-  previousOwner: Scalars['String'];
-  tokenId: Scalars['String'];
-  v1BidShareStatus: Scalars['String'];
-};
-
-export type V1MarketAskCreatedEventProperties = {
-  __typename?: 'V1MarketAskCreatedEventProperties';
-  amount: Scalars['String'];
-  currency: Scalars['String'];
-  price: PriceAtTime;
-};
-
-export type V1MarketAskRemovedEventProperties = {
-  __typename?: 'V1MarketAskRemovedEventProperties';
-  amount: Scalars['String'];
-  currency: Scalars['String'];
-  price: PriceAtTime;
-};
-
-export type V1MarketBidShareUpdatedEventProperties = {
-  __typename?: 'V1MarketBidShareUpdatedEventProperties';
-  creator: Scalars['String'];
-  owner: Scalars['String'];
-  previousOwner: Scalars['String'];
-};
-
-export type V1MarketEvent = {
-  __typename?: 'V1MarketEvent';
-  address: Scalars['String'];
-  collectionAddress: Scalars['String'];
-  properties: V1MarketEventProperties;
-  tokenId: Scalars['String'];
-  v1MarketEventType: V1MarketEventType;
-};
-
-export type V1MarketEventProperties = V1MarketAskCreatedEventProperties | V1MarketAskRemovedEventProperties | V1MarketBidShareUpdatedEventProperties | V1MarketOfferCreatedEventProperties | V1MarketOfferFinalizedEventProperties | V1MarketOfferRemovedEventProperties;
-
-export enum V1MarketEventType {
-  V1MarketAskCreated = 'V1_MARKET_ASK_CREATED',
-  V1MarketAskRemoved = 'V1_MARKET_ASK_REMOVED',
-  V1MarketBidCreated = 'V1_MARKET_BID_CREATED',
-  V1MarketBidFinalized = 'V1_MARKET_BID_FINALIZED',
-  V1MarketBidRemoved = 'V1_MARKET_BID_REMOVED',
-  V1MarketBidShareUpdated = 'V1_MARKET_BID_SHARE_UPDATED'
-}
-
-export type V1MarketOfferCreatedEventProperties = {
-  __typename?: 'V1MarketOfferCreatedEventProperties';
-  amount: Scalars['String'];
-  bidder: Scalars['String'];
-  currency: Scalars['String'];
-  price: PriceAtTime;
-  recipient: Scalars['String'];
-  sellOnShare: Scalars['String'];
-};
-
-export type V1MarketOfferFinalizedEventProperties = {
-  __typename?: 'V1MarketOfferFinalizedEventProperties';
-  amount: Scalars['String'];
-  bidder: Scalars['String'];
-  currency: Scalars['String'];
-  price: PriceAtTime;
-  recipient: Scalars['String'];
-  sellOnShare: Scalars['String'];
-};
-
-export type V1MarketOfferRemovedEventProperties = {
-  __typename?: 'V1MarketOfferRemovedEventProperties';
-  amount: Scalars['String'];
-  bidder: Scalars['String'];
-  currency: Scalars['String'];
-  price: PriceAtTime;
-  recipient: Scalars['String'];
-  sellOnShare: Scalars['String'];
-};
-
-export type V1Offer = {
-  __typename?: 'V1Offer';
-  address: Scalars['String'];
-  amount: PriceAtTime;
-  bidder: Scalars['String'];
-  collectionAddress: Scalars['String'];
-  currency: Scalars['String'];
-  recipient: Scalars['String'];
-  sellOnShare: Scalars['String'];
-  tokenId: Scalars['String'];
-  v1OfferStatus: Scalars['String'];
-};
-
-export type V2Auction = {
-  __typename?: 'V2Auction';
-  address: Scalars['String'];
-  amountCuratorReceived?: Maybe<PriceAtTime>;
-  amountTokenOwnerReceived?: Maybe<PriceAtTime>;
-  approved: Scalars['Boolean'];
-  auctionCurrency: Scalars['String'];
-  auctionId: Scalars['String'];
-  collectionAddress: Scalars['String'];
-  curator: Scalars['String'];
-  curatorFeePercentage: Scalars['Int'];
-  duration: Scalars['String'];
-  estimatedExpirationTime?: Maybe<Scalars['datetime']>;
-  firstBidTime?: Maybe<Scalars['datetime']>;
-  highestBidPrice?: Maybe<PriceAtTime>;
-  highestBidder?: Maybe<Scalars['String']>;
-  reservePrice: PriceAtTime;
-  tokenId: Scalars['String'];
-  tokenOwner: Scalars['String'];
-  v2AuctionStatus: Scalars['String'];
-};
-
-export type V2AuctionApprovalUpdatedEventProperties = {
-  __typename?: 'V2AuctionApprovalUpdatedEventProperties';
-  approved: Scalars['Boolean'];
-};
-
-export type V2AuctionBidEventProperties = {
-  __typename?: 'V2AuctionBidEventProperties';
-  extended: Scalars['Boolean'];
-  firstBid: Scalars['Boolean'];
-  price: PriceAtTime;
-  sender: Scalars['String'];
-  value: Scalars['String'];
-};
-
-export type V2AuctionCanceledEventProperties = {
-  __typename?: 'V2AuctionCanceledEventProperties';
-  tokenOwner: Scalars['String'];
-};
-
-export type V2AuctionCreatedEventProperties = {
-  __typename?: 'V2AuctionCreatedEventProperties';
-  auctionCurrency: Scalars['String'];
-  curator: Scalars['String'];
-  curatorFeePercentage: Scalars['Int'];
-  duration: Scalars['String'];
-  price: PriceAtTime;
-  reservePrice: Scalars['String'];
-  tokenOwner: Scalars['String'];
-};
-
-export type V2AuctionDurationExtendedEventProperties = {
-  __typename?: 'V2AuctionDurationExtendedEventProperties';
-  duration: Scalars['String'];
-};
-
-export type V2AuctionEndedEventProperties = {
-  __typename?: 'V2AuctionEndedEventProperties';
-  amount: Scalars['String'];
-  auctionCurrency: Scalars['String'];
-  curator: Scalars['String'];
-  curatorFee: Scalars['String'];
-  tokenOwner: Scalars['String'];
-  winner: Scalars['String'];
-};
-
-export type V2AuctionEvent = {
-  __typename?: 'V2AuctionEvent';
-  address: Scalars['String'];
-  auctionId: Scalars['Int'];
-  collectionAddress: Scalars['String'];
-  properties: V2AuctionEventProperties;
-  tokenId: Scalars['String'];
-  v2AuctionEventType: V2AuctionEventType;
-};
-
-export type V2AuctionEventProperties = V2AuctionApprovalUpdatedEventProperties | V2AuctionBidEventProperties | V2AuctionCanceledEventProperties | V2AuctionCreatedEventProperties | V2AuctionDurationExtendedEventProperties | V2AuctionEndedEventProperties | V2AuctionReservePriceUpdatedEventProperties;
-
-export enum V2AuctionEventType {
-  V2AuctionApprovalUpdated = 'V2_AUCTION_APPROVAL_UPDATED',
-  V2AuctionBid = 'V2_AUCTION_BID',
-  V2AuctionCanceled = 'V2_AUCTION_CANCELED',
-  V2AuctionCreated = 'V2_AUCTION_CREATED',
-  V2AuctionDurationExtended = 'V2_AUCTION_DURATION_EXTENDED',
-  V2AuctionEnded = 'V2_AUCTION_ENDED',
-  V2AuctionReservePriceUpdated = 'V2_AUCTION_RESERVE_PRICE_UPDATED'
-}
-
-export type V2AuctionReservePriceUpdatedEventProperties = {
-  __typename?: 'V2AuctionReservePriceUpdatedEventProperties';
-  price: PriceAtTime;
-  reservePrice: Scalars['String'];
 };
 
 export type V3Ask = {
@@ -1962,91 +1252,6 @@ export const OwnerCountInfoFragmentDoc = gql`
   tokenIds
 }
     `;
-export const LilNounsAuctionInfoFragmentDoc = gql`
-    fragment LilNounsAuctionInfo on LilNounsAuction {
-  address
-  tokenId
-  collectionAddress
-  auctionId
-  auctionCurrency
-  highestBidPrice {
-    __typename
-    ...PriceSummary
-  }
-  startTime
-  endTime
-  duration
-  firstBidTime
-  highestBidder
-  estimatedDurationTime
-  lilNounsReservePrice: reservePrice {
-    __typename
-    ...PriceSummary
-  }
-  amount {
-    __typename
-    ...PriceSummary
-  }
-  minBidIncrementPercentage
-  winner
-  timeBuffer
-}
-    ${PriceSummaryFragmentDoc}`;
-export const NounsAuctionInfoFragmentDoc = gql`
-    fragment NounsAuctionInfo on NounsAuction {
-  address
-  tokenId
-  collectionAddress
-  auctionId
-  auctionCurrency
-  highestBidPrice {
-    __typename
-    ...PriceSummary
-  }
-  startTime
-  endTime
-  duration
-  firstBidTime
-  highestBidder
-  estimatedDurationTime
-  nounsReservePrice: reservePrice {
-    __typename
-    ...PriceSummary
-  }
-  amount {
-    __typename
-    ...PriceSummary
-  }
-  minBidIncrementPercentage
-  winner
-  timeBuffer
-}
-    ${PriceSummaryFragmentDoc}`;
-export const V2AuctionMarketPropertiesFragmentDoc = gql`
-    fragment V2AuctionMarketProperties on V2Auction {
-  __typename
-  firstBidTime
-  highestBidder
-  curator
-  collectionAddress
-  curatorFeePercentage
-  tokenId
-  auctionCurrency
-  duration
-  estimatedExpirationTime
-  v2AuctionStatus
-  tokenOwner
-  address
-  auctionId
-  approved
-  reservePrice {
-    ...PriceSummary
-  }
-  highestBidPrice {
-    ...PriceSummary
-  }
-}
-    ${PriceSummaryFragmentDoc}`;
 export const V3ReserveAuctionPropertiesFragmentDoc = gql`
     fragment V3ReserveAuctionProperties on V3ReserveAuction {
   address
@@ -2098,15 +1303,6 @@ export const ActiveMarketInfoFragmentDoc = gql`
   marketType
   properties {
     __typename
-    ... on LilNounsAuction {
-      ...LilNounsAuctionInfo
-    }
-    ... on NounsAuction {
-      ...NounsAuctionInfo
-    }
-    ... on V2Auction {
-      ...V2AuctionMarketProperties
-    }
     ... on V3ReserveAuction {
       ...V3ReserveAuctionProperties
     }
@@ -2118,9 +1314,6 @@ export const ActiveMarketInfoFragmentDoc = gql`
 }
     ${NetworkInfoDetailsFragmentDoc}
 ${TransactionDetailsFragmentDoc}
-${LilNounsAuctionInfoFragmentDoc}
-${NounsAuctionInfoFragmentDoc}
-${V2AuctionMarketPropertiesFragmentDoc}
 ${V3ReserveAuctionPropertiesFragmentDoc}
 ${PriceSummaryFragmentDoc}`;
 export const MarketInfoFragmentDoc = gql`
@@ -2159,38 +1352,12 @@ export const V3AskPropertiesFragmentDoc = gql`
   }
 }
     ${PriceSummaryFragmentDoc}`;
-export const V1OfferPropertiesFragmentDoc = gql`
-    fragment V1OfferProperties on V1Offer {
-  v1OfferStatus
-  sellOnShare
-  bidder
-  currency
-  amount {
-    ...PriceSummary
-  }
-}
-    ${PriceSummaryFragmentDoc}`;
-export const V1AskPropertiesFragmentDoc = gql`
-    fragment V1AskProperties on V1Ask {
-  v1AskStatus
-  currency
-  amount {
-    ...PriceSummary
-  }
-}
-    ${PriceSummaryFragmentDoc}`;
 export const MarketPropertiesFullFragmentDoc = gql`
     fragment MarketPropertiesFull on MarketProperties {
   __typename
-  ...V2AuctionMarketProperties
   ...V3AskProperties
-  ...V1OfferProperties
-  ...V1AskProperties
 }
-    ${V2AuctionMarketPropertiesFragmentDoc}
-${V3AskPropertiesFragmentDoc}
-${V1OfferPropertiesFragmentDoc}
-${V1AskPropertiesFragmentDoc}`;
+    ${V3AskPropertiesFragmentDoc}`;
 export const MarketDetailsFragmentDoc = gql`
     fragment MarketDetails on Market {
   properties {
@@ -2230,114 +1397,6 @@ export const TokensSalesInfoFragmentDoc = gql`
   }
 }
     ${SaleInfoFragmentDoc}`;
-export const V1MarketEventPropertiesInfoFragmentDoc = gql`
-    fragment V1MarketEventPropertiesInfo on V1MarketEventProperties {
-  __typename
-  ... on V1MarketAskCreatedEventProperties {
-    amount
-    price {
-      ...PriceSummary
-    }
-    currency
-  }
-  ... on V1MarketAskRemovedEventProperties {
-    amount
-    price {
-      ...PriceSummary
-    }
-    currency
-  }
-  ... on V1MarketOfferCreatedEventProperties {
-    amount
-    price {
-      ...PriceSummary
-    }
-    currency
-    bidder
-  }
-  ... on V1MarketOfferFinalizedEventProperties {
-    amount
-    price {
-      ...PriceSummary
-    }
-    currency
-    bidder
-  }
-  ... on V1MarketOfferRemovedEventProperties {
-    amount
-    price {
-      ...PriceSummary
-    }
-    currency
-    bidder
-  }
-}
-    ${PriceSummaryFragmentDoc}`;
-export const V2AuctionEventPropertiesInfoFragmentDoc = gql`
-    fragment V2AuctionEventPropertiesInfo on V2AuctionEventProperties {
-  __typename
-  ... on V2AuctionBidEventProperties {
-    sender
-    firstBid
-    extended
-    value
-    price {
-      ...PriceSummary
-    }
-  }
-  ... on V2AuctionCreatedEventProperties {
-    auctionCurrency
-    tokenOwner
-    curator
-    curatorFeePercentage
-    duration
-    reservePrice
-    price {
-      ...PriceSummary
-    }
-  }
-  ... on V2AuctionCanceledEventProperties {
-    tokenOwner
-  }
-  ... on V2AuctionDurationExtendedEventProperties {
-    duration
-  }
-  ... on V2AuctionBidEventProperties {
-    sender
-    firstBid
-    extended
-    value
-    price {
-      ...PriceSummary
-    }
-  }
-  ... on V2AuctionEndedEventProperties {
-    tokenOwner
-    curator
-    winner
-    auctionCurrency
-    amount
-    curatorFee
-  }
-  ... on V2AuctionReservePriceUpdatedEventProperties {
-    reservePrice
-    price {
-      ...PriceSummary
-    }
-  }
-  ... on V2AuctionEndedEventProperties {
-    tokenOwner
-    curator
-    winner
-    auctionCurrency
-    amount
-    curatorFee
-  }
-  ... on V2AuctionApprovalUpdatedEventProperties {
-    approved
-  }
-}
-    ${PriceSummaryFragmentDoc}`;
 export const V3AskEventPropertiesInfoFragmentDoc = gql`
     fragment V3AskEventPropertiesInfo on V3AskEventProperties {
   __typename
@@ -2410,25 +1469,6 @@ export const EventInfoFragmentDoc = gql`
       collectionAddress
       tokenId
     }
-    ... on V1MarketEvent {
-      v1MarketEventType
-      address
-      collectionAddress
-      tokenId
-      properties {
-        ...V1MarketEventPropertiesInfo
-      }
-    }
-    ... on V2AuctionEvent {
-      v2AuctionEventType
-      address
-      auctionId
-      collectionAddress
-      tokenId
-      properties {
-        ...V2AuctionEventPropertiesInfo
-      }
-    }
     ... on V3AskEvent {
       v3AskEventType
       address
@@ -2442,8 +1482,6 @@ export const EventInfoFragmentDoc = gql`
 }
     ${TransactionDetailsFragmentDoc}
 ${PriceSummaryFragmentDoc}
-${V1MarketEventPropertiesInfoFragmentDoc}
-${V2AuctionEventPropertiesInfoFragmentDoc}
 ${V3AskEventPropertiesInfoFragmentDoc}`;
 export const TokensEventsInfoFragmentDoc = gql`
     fragment TokensEventsInfo on TokenWithMarketsSummary {
@@ -2463,79 +1501,6 @@ export const TokenFullDetailsFragmentDoc = gql`
 }
     ${SaleInfoFragmentDoc}
 ${EventInfoFragmentDoc}`;
-export const SeaportOrderItemDetailsFragmentDoc = gql`
-    fragment SeaportOrderItemDetails on SeaportOrderItem {
-  itemType
-  address
-  tokenId
-  criteria
-  startAmount
-  endAmount
-  startPrice {
-    __typename
-    ...PriceSummary
-  }
-  endPrice {
-    __typename
-    ...PriceSummary
-  }
-  recipient
-}
-    ${PriceSummaryFragmentDoc}`;
-export const SeaportOrderDetailsFragmentDoc = gql`
-    fragment SeaportOrderDetails on SeaportOrder {
-  orderHash
-  offerer
-  startTime
-  endTime
-  orderType
-  price {
-    __typename
-    ...PriceSummary
-  }
-  offers {
-    __typename
-    ...SeaportOrderItemDetails
-  }
-  considerations {
-    __typename
-    ...SeaportOrderItemDetails
-  }
-  zone
-  zoneHash
-  salt
-  conduitKey
-  counter
-  signature
-  schemaHash
-}
-    ${PriceSummaryFragmentDoc}
-${SeaportOrderItemDetailsFragmentDoc}`;
-export const OffchainOrderInfoFragmentDoc = gql`
-    fragment OffchainOrderInfo on OffchainOrder {
-  networkInfo {
-    __typename
-    ...NetworkInfoDetails
-  }
-  contractAddress
-  collectionAddress
-  tokenId
-  offerer
-  startTime
-  endTime
-  orderType
-  price {
-    __typename
-    ...PriceSummary
-  }
-  properties {
-    ...SeaportOrderDetails
-  }
-  calldata
-}
-    ${NetworkInfoDetailsFragmentDoc}
-${PriceSummaryFragmentDoc}
-${SeaportOrderDetailsFragmentDoc}`;
 export const EventsDocument = gql`
     query events($networks: [NetworkInput!]!, $filter: EventsQueryFilter, $pagination: PaginationInput!, $sort: EventSortKeySortInput!, $where: EventsQueryInput!) {
   events(
@@ -2744,35 +1709,6 @@ ${TokenDetailsFragmentDoc}
 ${TokenFullDetailsFragmentDoc}
 ${MarketInfoFragmentDoc}
 ${MarketDetailsFragmentDoc}`;
-export const OffchainOrdersDocument = gql`
-    query offchainOrders($networks: [NetworkInput!], $where: OffchainOrdersQueryInput, $filter: OffchainOrdersQueryFilter, $sort: OffchainOrderSortKeySortInput, $pagination: PaginationInput) {
-  offchainOrders(
-    networks: $networks
-    where: $where
-    filter: $filter
-    sort: $sort
-    pagination: $pagination
-  ) {
-    nodes {
-      __typename
-      token {
-        __typename
-        ...TokenInfo
-      }
-      offchainOrder {
-        __typename
-        ...OffchainOrderInfo
-      }
-    }
-    pageInfo {
-      __typename
-      ...PageInfoDefault
-    }
-  }
-}
-    ${TokenInfoFragmentDoc}
-${OffchainOrderInfoFragmentDoc}
-${PageInfoDefaultFragmentDoc}`;
 export const AggregateAttributesDocument = gql`
     query aggregateAttributes($networks: [NetworkInput!]!, $where: AggregateAttributesQueryInput!) {
   aggregateAttributes(networks: $networks, where: $where) {
@@ -2924,9 +1860,6 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     token(variables: TokenQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<TokenQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<TokenQuery>(TokenDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'token');
     },
-    offchainOrders(variables?: OffchainOrdersQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<OffchainOrdersQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<OffchainOrdersQuery>(OffchainOrdersDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'offchainOrders');
-    },
     aggregateAttributes(variables: AggregateAttributesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AggregateAttributesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<AggregateAttributesQuery>(AggregateAttributesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'aggregateAttributes');
     },
@@ -2966,69 +1899,21 @@ export type TransactionDetailsFragment = { __typename?: 'TransactionInfo', block
 
 export type SaleInfoFragment = { __typename?: 'Sale', saleContractAddress?: string | null, buyerAddress: string, collectionAddress: string, sellerAddress: string, tokenId: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } };
 
-export type V2AuctionMarketPropertiesFragment = { __typename: 'V2Auction', firstBidTime?: any | null, highestBidder?: string | null, curator: string, collectionAddress: string, curatorFeePercentage: number, tokenId: string, auctionCurrency: string, duration: string, estimatedExpirationTime?: any | null, v2AuctionStatus: string, tokenOwner: string, address: string, auctionId: string, approved: boolean, reservePrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, highestBidPrice?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null };
-
 export type V3AskPropertiesFragment = { __typename: 'V3Ask', buyer?: string | null, finder?: string | null, findersFeeBps?: number | null, sellerFundsRecipient?: string | null, v3AskStatus: string, seller: string, address: string, askCurrency: string, collectionAddress: string, askPrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } };
-
-export type V1OfferPropertiesFragment = { __typename?: 'V1Offer', v1OfferStatus: string, sellOnShare: string, bidder: string, currency: string, amount: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } };
-
-export type V1AskPropertiesFragment = { __typename?: 'V1Ask', v1AskStatus: string, currency: string, amount: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } };
-
-type MarketPropertiesFull_LilNounsAuction_Fragment = { __typename: 'LilNounsAuction' };
-
-type MarketPropertiesFull_NounsAuction_Fragment = { __typename: 'NounsAuction' };
-
-type MarketPropertiesFull_V1Ask_Fragment = { __typename: 'V1Ask', v1AskStatus: string, currency: string, amount: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } };
-
-type MarketPropertiesFull_V1BidShare_Fragment = { __typename: 'V1BidShare' };
-
-type MarketPropertiesFull_V1Offer_Fragment = { __typename: 'V1Offer', v1OfferStatus: string, sellOnShare: string, bidder: string, currency: string, amount: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } };
-
-type MarketPropertiesFull_V2Auction_Fragment = { __typename: 'V2Auction', firstBidTime?: any | null, highestBidder?: string | null, curator: string, collectionAddress: string, curatorFeePercentage: number, tokenId: string, auctionCurrency: string, duration: string, estimatedExpirationTime?: any | null, v2AuctionStatus: string, tokenOwner: string, address: string, auctionId: string, approved: boolean, reservePrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, highestBidPrice?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null };
 
 type MarketPropertiesFull_V3Ask_Fragment = { __typename: 'V3Ask', buyer?: string | null, finder?: string | null, findersFeeBps?: number | null, sellerFundsRecipient?: string | null, v3AskStatus: string, seller: string, address: string, askCurrency: string, collectionAddress: string, askPrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } };
 
 type MarketPropertiesFull_V3ReserveAuction_Fragment = { __typename: 'V3ReserveAuction' };
 
-export type MarketPropertiesFullFragment = MarketPropertiesFull_LilNounsAuction_Fragment | MarketPropertiesFull_NounsAuction_Fragment | MarketPropertiesFull_V1Ask_Fragment | MarketPropertiesFull_V1BidShare_Fragment | MarketPropertiesFull_V1Offer_Fragment | MarketPropertiesFull_V2Auction_Fragment | MarketPropertiesFull_V3Ask_Fragment | MarketPropertiesFull_V3ReserveAuction_Fragment;
+export type MarketPropertiesFullFragment = MarketPropertiesFull_V3Ask_Fragment | MarketPropertiesFull_V3ReserveAuction_Fragment;
 
 export type NetworkInfoDetailsFragment = { __typename?: 'NetworkInfo', chain: Chain, network: Network };
 
 export type MarketInfoFragment = { __typename?: 'Market', collectionAddress?: string | null, marketAddress: string, marketType: MarketType, status: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, networkInfo: { __typename?: 'NetworkInfo', chain: Chain, network: Network } };
 
-export type MarketDetailsFragment = { __typename?: 'Market', properties?: { __typename: 'LilNounsAuction' } | { __typename: 'NounsAuction' } | { __typename: 'V1Ask', v1AskStatus: string, currency: string, amount: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1BidShare' } | { __typename: 'V1Offer', v1OfferStatus: string, sellOnShare: string, bidder: string, currency: string, amount: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2Auction', firstBidTime?: any | null, highestBidder?: string | null, curator: string, collectionAddress: string, curatorFeePercentage: number, tokenId: string, auctionCurrency: string, duration: string, estimatedExpirationTime?: any | null, v2AuctionStatus: string, tokenOwner: string, address: string, auctionId: string, approved: boolean, reservePrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, highestBidPrice?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | { __typename: 'V3Ask', buyer?: string | null, finder?: string | null, findersFeeBps?: number | null, sellerFundsRecipient?: string | null, v3AskStatus: string, seller: string, address: string, askCurrency: string, collectionAddress: string, askPrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3ReserveAuction' } | null };
+export type MarketDetailsFragment = { __typename?: 'Market', properties?: { __typename: 'V3Ask', buyer?: string | null, finder?: string | null, findersFeeBps?: number | null, sellerFundsRecipient?: string | null, v3AskStatus: string, seller: string, address: string, askCurrency: string, collectionAddress: string, askPrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3ReserveAuction' } | null };
 
 export type TokenInfoFragment = { __typename: 'Token', tokenId: string, collectionAddress: string, lastRefreshTime?: any | null, owner?: string | null, name?: string | null, description?: string | null, tokenContract?: { __typename?: 'TokenContract', name?: string | null, network: string, description?: string | null, collectionAddress: string, symbol?: string | null, chain: number } | null, mintInfo?: { __typename?: 'MintInfo', originatorAddress: string, toAddress: string, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, mintContext: { __typename: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null } } | null, image?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, content?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null };
-
-type V1MarketEventPropertiesInfo_V1MarketAskCreatedEventProperties_Fragment = { __typename: 'V1MarketAskCreatedEventProperties', amount: string, currency: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } };
-
-type V1MarketEventPropertiesInfo_V1MarketAskRemovedEventProperties_Fragment = { __typename: 'V1MarketAskRemovedEventProperties', amount: string, currency: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } };
-
-type V1MarketEventPropertiesInfo_V1MarketBidShareUpdatedEventProperties_Fragment = { __typename: 'V1MarketBidShareUpdatedEventProperties' };
-
-type V1MarketEventPropertiesInfo_V1MarketOfferCreatedEventProperties_Fragment = { __typename: 'V1MarketOfferCreatedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } };
-
-type V1MarketEventPropertiesInfo_V1MarketOfferFinalizedEventProperties_Fragment = { __typename: 'V1MarketOfferFinalizedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } };
-
-type V1MarketEventPropertiesInfo_V1MarketOfferRemovedEventProperties_Fragment = { __typename: 'V1MarketOfferRemovedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } };
-
-export type V1MarketEventPropertiesInfoFragment = V1MarketEventPropertiesInfo_V1MarketAskCreatedEventProperties_Fragment | V1MarketEventPropertiesInfo_V1MarketAskRemovedEventProperties_Fragment | V1MarketEventPropertiesInfo_V1MarketBidShareUpdatedEventProperties_Fragment | V1MarketEventPropertiesInfo_V1MarketOfferCreatedEventProperties_Fragment | V1MarketEventPropertiesInfo_V1MarketOfferFinalizedEventProperties_Fragment | V1MarketEventPropertiesInfo_V1MarketOfferRemovedEventProperties_Fragment;
-
-type V2AuctionEventPropertiesInfo_V2AuctionApprovalUpdatedEventProperties_Fragment = { __typename: 'V2AuctionApprovalUpdatedEventProperties', approved: boolean };
-
-type V2AuctionEventPropertiesInfo_V2AuctionBidEventProperties_Fragment = { __typename: 'V2AuctionBidEventProperties', sender: string, firstBid: boolean, extended: boolean, value: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } };
-
-type V2AuctionEventPropertiesInfo_V2AuctionCanceledEventProperties_Fragment = { __typename: 'V2AuctionCanceledEventProperties', tokenOwner: string };
-
-type V2AuctionEventPropertiesInfo_V2AuctionCreatedEventProperties_Fragment = { __typename: 'V2AuctionCreatedEventProperties', auctionCurrency: string, tokenOwner: string, curator: string, curatorFeePercentage: number, duration: string, reservePrice: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } };
-
-type V2AuctionEventPropertiesInfo_V2AuctionDurationExtendedEventProperties_Fragment = { __typename: 'V2AuctionDurationExtendedEventProperties', duration: string };
-
-type V2AuctionEventPropertiesInfo_V2AuctionEndedEventProperties_Fragment = { __typename: 'V2AuctionEndedEventProperties', tokenOwner: string, curator: string, winner: string, auctionCurrency: string, amount: string, curatorFee: string };
-
-type V2AuctionEventPropertiesInfo_V2AuctionReservePriceUpdatedEventProperties_Fragment = { __typename: 'V2AuctionReservePriceUpdatedEventProperties', reservePrice: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } };
-
-export type V2AuctionEventPropertiesInfoFragment = V2AuctionEventPropertiesInfo_V2AuctionApprovalUpdatedEventProperties_Fragment | V2AuctionEventPropertiesInfo_V2AuctionBidEventProperties_Fragment | V2AuctionEventPropertiesInfo_V2AuctionCanceledEventProperties_Fragment | V2AuctionEventPropertiesInfo_V2AuctionCreatedEventProperties_Fragment | V2AuctionEventPropertiesInfo_V2AuctionDurationExtendedEventProperties_Fragment | V2AuctionEventPropertiesInfo_V2AuctionEndedEventProperties_Fragment | V2AuctionEventPropertiesInfo_V2AuctionReservePriceUpdatedEventProperties_Fragment;
 
 type V3AskEventPropertiesInfo_V3AskCanceledEventProperties_Fragment = { __typename: 'V3AskCanceledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } };
 
@@ -3042,7 +1927,7 @@ type V3AskEventPropertiesInfo_V3PrivateAskEventProperties_Fragment = { __typenam
 
 export type V3AskEventPropertiesInfoFragment = V3AskEventPropertiesInfo_V3AskCanceledEventProperties_Fragment | V3AskEventPropertiesInfo_V3AskCreatedEventProperties_Fragment | V3AskEventPropertiesInfo_V3AskFilledEventProperties_Fragment | V3AskEventPropertiesInfo_V3AskPriceUpdatedEventProperties_Fragment | V3AskEventPropertiesInfo_V3PrivateAskEventProperties_Fragment;
 
-export type EventInfoFragment = { __typename?: 'Event', eventType: EventType, collectionAddress?: string | null, tokenId?: string | null, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, properties: { __typename: 'ApprovalEvent' } | { __typename: 'LilNounsAuctionEvent' } | { __typename: 'MintEvent', tokenId: string, collectionAddress: string, originatorAddress: string, toAddress: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'NounsAuctionEvent' } | { __typename: 'Sale' } | { __typename: 'SeaportEvent' } | { __typename: 'TransferEvent', fromAddress: string, toAddress: string, collectionAddress: string, tokenId: string } | { __typename: 'V1MarketEvent', v1MarketEventType: V1MarketEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V1MarketAskCreatedEventProperties', amount: string, currency: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketAskRemovedEventProperties', amount: string, currency: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketBidShareUpdatedEventProperties' } | { __typename: 'V1MarketOfferCreatedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketOfferFinalizedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketOfferRemovedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } } | { __typename: 'V2AuctionEvent', v2AuctionEventType: V2AuctionEventType, address: string, auctionId: number, collectionAddress: string, tokenId: string, properties: { __typename: 'V2AuctionApprovalUpdatedEventProperties', approved: boolean } | { __typename: 'V2AuctionBidEventProperties', sender: string, firstBid: boolean, extended: boolean, value: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2AuctionCanceledEventProperties', tokenOwner: string } | { __typename: 'V2AuctionCreatedEventProperties', auctionCurrency: string, tokenOwner: string, curator: string, curatorFeePercentage: number, duration: string, reservePrice: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2AuctionDurationExtendedEventProperties', duration: string } | { __typename: 'V2AuctionEndedEventProperties', tokenOwner: string, curator: string, winner: string, auctionCurrency: string, amount: string, curatorFee: string } | { __typename: 'V2AuctionReservePriceUpdatedEventProperties', reservePrice: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } } | { __typename: 'V3AskEvent', v3AskEventType: V3AskEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V3AskCanceledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskCreatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskFilledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, finder: string, buyer: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskPriceUpdatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3PrivateAskEventProperties' } } | { __typename: 'V3ReserveAuctionEvent' } };
+export type EventInfoFragment = { __typename?: 'Event', eventType: EventType, collectionAddress?: string | null, tokenId?: string | null, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, properties: { __typename: 'ApprovalEvent' } | { __typename: 'MintEvent', tokenId: string, collectionAddress: string, originatorAddress: string, toAddress: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'Sale' } | { __typename: 'TransferEvent', fromAddress: string, toAddress: string, collectionAddress: string, tokenId: string } | { __typename: 'V3AskEvent', v3AskEventType: V3AskEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V3AskCanceledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskCreatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskFilledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, finder: string, buyer: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskPriceUpdatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3PrivateAskEventProperties' } } | { __typename: 'V3ReserveAuctionEvent' } };
 
 export type TokenDetailsFragment = { __typename?: 'Token', metadata?: any | null, tokenUrl?: string | null, tokenUrlMimeType?: string | null, attributes?: Array<{ __typename?: 'TokenAttribute', traitType?: string | null, value?: string | null, displayType?: string | null }> | null };
 
@@ -3065,15 +1950,11 @@ export type EventsQueryVariables = Exact<{
 }>;
 
 
-export type EventsQuery = { __typename?: 'RootQuery', events: { __typename: 'EventConnection', pageInfo: { __typename: 'PageInfo', endCursor?: string | null, hasNextPage: boolean, limit: number }, nodes: Array<{ __typename?: 'Event', eventType: EventType, collectionAddress?: string | null, tokenId?: string | null, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, properties: { __typename: 'ApprovalEvent' } | { __typename: 'LilNounsAuctionEvent' } | { __typename: 'MintEvent', tokenId: string, collectionAddress: string, originatorAddress: string, toAddress: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'NounsAuctionEvent' } | { __typename: 'Sale' } | { __typename: 'SeaportEvent' } | { __typename: 'TransferEvent', fromAddress: string, toAddress: string, collectionAddress: string, tokenId: string } | { __typename: 'V1MarketEvent', v1MarketEventType: V1MarketEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V1MarketAskCreatedEventProperties', amount: string, currency: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketAskRemovedEventProperties', amount: string, currency: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketBidShareUpdatedEventProperties' } | { __typename: 'V1MarketOfferCreatedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketOfferFinalizedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketOfferRemovedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } } | { __typename: 'V2AuctionEvent', v2AuctionEventType: V2AuctionEventType, address: string, auctionId: number, collectionAddress: string, tokenId: string, properties: { __typename: 'V2AuctionApprovalUpdatedEventProperties', approved: boolean } | { __typename: 'V2AuctionBidEventProperties', sender: string, firstBid: boolean, extended: boolean, value: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2AuctionCanceledEventProperties', tokenOwner: string } | { __typename: 'V2AuctionCreatedEventProperties', auctionCurrency: string, tokenOwner: string, curator: string, curatorFeePercentage: number, duration: string, reservePrice: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2AuctionDurationExtendedEventProperties', duration: string } | { __typename: 'V2AuctionEndedEventProperties', tokenOwner: string, curator: string, winner: string, auctionCurrency: string, amount: string, curatorFee: string } | { __typename: 'V2AuctionReservePriceUpdatedEventProperties', reservePrice: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } } | { __typename: 'V3AskEvent', v3AskEventType: V3AskEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V3AskCanceledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskCreatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskFilledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, finder: string, buyer: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskPriceUpdatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3PrivateAskEventProperties' } } | { __typename: 'V3ReserveAuctionEvent' } }> } };
-
-export type LilNounsAuctionInfoFragment = { __typename?: 'LilNounsAuction', address: string, tokenId: string, collectionAddress: string, auctionId: string, auctionCurrency: string, startTime: string, endTime: string, duration: string, firstBidTime?: any | null, highestBidder?: string | null, estimatedDurationTime?: any | null, minBidIncrementPercentage?: number | null, winner?: string | null, timeBuffer?: number | null, highestBidPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, lilNounsReservePrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, amount?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null };
-
-export type NounsAuctionInfoFragment = { __typename?: 'NounsAuction', address: string, tokenId: string, collectionAddress: string, auctionId: string, auctionCurrency: string, startTime: string, endTime: string, duration: string, firstBidTime?: any | null, highestBidder?: string | null, estimatedDurationTime?: any | null, minBidIncrementPercentage?: number | null, winner?: string | null, timeBuffer?: number | null, highestBidPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, nounsReservePrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, amount?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null };
+export type EventsQuery = { __typename?: 'RootQuery', events: { __typename: 'EventConnection', pageInfo: { __typename: 'PageInfo', endCursor?: string | null, hasNextPage: boolean, limit: number }, nodes: Array<{ __typename?: 'Event', eventType: EventType, collectionAddress?: string | null, tokenId?: string | null, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, properties: { __typename: 'ApprovalEvent' } | { __typename: 'MintEvent', tokenId: string, collectionAddress: string, originatorAddress: string, toAddress: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'Sale' } | { __typename: 'TransferEvent', fromAddress: string, toAddress: string, collectionAddress: string, tokenId: string } | { __typename: 'V3AskEvent', v3AskEventType: V3AskEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V3AskCanceledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskCreatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskFilledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, finder: string, buyer: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskPriceUpdatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3PrivateAskEventProperties' } } | { __typename: 'V3ReserveAuctionEvent' } }> } };
 
 export type V3ReserveAuctionPropertiesFragment = { __typename?: 'V3ReserveAuction', address: string, tokenId: string, collectionAddress: string, status: string, firstBid: boolean, extended: boolean, seller: string, reserve: string, sellerFundsRecipient: string, highestBid: string, duration: string, startTime: string, currency: string, finder: string, findersFeeBps: string, estimatedDurationTime?: any | null, v3HighestBidder: string, v3FirstBidTime: string, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, v3AuctionReservePrice: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, highestBidPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null };
 
-export type ActiveMarketInfoFragment = { __typename?: 'ActiveMarket', status: string, marketAddress: string, collectionAddress?: string | null, tokenId?: string | null, marketType: ActiveMarketType, networkInfo: { __typename: 'NetworkInfo', chain: Chain, network: Network }, transactionInfo: { __typename: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, properties?: { __typename: 'LilNounsAuction', address: string, tokenId: string, collectionAddress: string, auctionId: string, auctionCurrency: string, startTime: string, endTime: string, duration: string, firstBidTime?: any | null, highestBidder?: string | null, estimatedDurationTime?: any | null, minBidIncrementPercentage?: number | null, winner?: string | null, timeBuffer?: number | null, highestBidPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, lilNounsReservePrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, amount?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | { __typename: 'NounsAuction', address: string, tokenId: string, collectionAddress: string, auctionId: string, auctionCurrency: string, startTime: string, endTime: string, duration: string, firstBidTime?: any | null, highestBidder?: string | null, estimatedDurationTime?: any | null, minBidIncrementPercentage?: number | null, winner?: string | null, timeBuffer?: number | null, highestBidPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, nounsReservePrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, amount?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | { __typename: 'V2Auction', firstBidTime?: any | null, highestBidder?: string | null, curator: string, collectionAddress: string, curatorFeePercentage: number, tokenId: string, auctionCurrency: string, duration: string, estimatedExpirationTime?: any | null, v2AuctionStatus: string, tokenOwner: string, address: string, auctionId: string, approved: boolean, reservePrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, highestBidPrice?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | { __typename: 'V3ReserveAuction', address: string, tokenId: string, collectionAddress: string, status: string, firstBid: boolean, extended: boolean, seller: string, reserve: string, sellerFundsRecipient: string, highestBid: string, duration: string, startTime: string, currency: string, finder: string, findersFeeBps: string, estimatedDurationTime?: any | null, v3HighestBidder: string, v3FirstBidTime: string, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, v3AuctionReservePrice: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, highestBidPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | null, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null };
+export type ActiveMarketInfoFragment = { __typename?: 'ActiveMarket', status: string, marketAddress: string, collectionAddress?: string | null, tokenId?: string | null, marketType: ActiveMarketType, networkInfo: { __typename: 'NetworkInfo', chain: Chain, network: Network }, transactionInfo: { __typename: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, properties?: { __typename: 'V3ReserveAuction', address: string, tokenId: string, collectionAddress: string, status: string, firstBid: boolean, extended: boolean, seller: string, reserve: string, sellerFundsRecipient: string, highestBid: string, duration: string, startTime: string, currency: string, finder: string, findersFeeBps: string, estimatedDurationTime?: any | null, v3HighestBidder: string, v3FirstBidTime: string, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, v3AuctionReservePrice: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, highestBidPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | null, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null };
 
 export type MarketQueryVariables = Exact<{
   network?: InputMaybe<NetworkInput>;
@@ -3081,7 +1962,7 @@ export type MarketQueryVariables = Exact<{
 }>;
 
 
-export type MarketQuery = { __typename?: 'RootQuery', market?: { __typename?: 'ActiveMarket', status: string, marketAddress: string, collectionAddress?: string | null, tokenId?: string | null, marketType: ActiveMarketType, networkInfo: { __typename: 'NetworkInfo', chain: Chain, network: Network }, transactionInfo: { __typename: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, properties?: { __typename: 'LilNounsAuction', address: string, tokenId: string, collectionAddress: string, auctionId: string, auctionCurrency: string, startTime: string, endTime: string, duration: string, firstBidTime?: any | null, highestBidder?: string | null, estimatedDurationTime?: any | null, minBidIncrementPercentage?: number | null, winner?: string | null, timeBuffer?: number | null, highestBidPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, lilNounsReservePrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, amount?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | { __typename: 'NounsAuction', address: string, tokenId: string, collectionAddress: string, auctionId: string, auctionCurrency: string, startTime: string, endTime: string, duration: string, firstBidTime?: any | null, highestBidder?: string | null, estimatedDurationTime?: any | null, minBidIncrementPercentage?: number | null, winner?: string | null, timeBuffer?: number | null, highestBidPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, nounsReservePrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, amount?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | { __typename: 'V2Auction', firstBidTime?: any | null, highestBidder?: string | null, curator: string, collectionAddress: string, curatorFeePercentage: number, tokenId: string, auctionCurrency: string, duration: string, estimatedExpirationTime?: any | null, v2AuctionStatus: string, tokenOwner: string, address: string, auctionId: string, approved: boolean, reservePrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, highestBidPrice?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | { __typename: 'V3ReserveAuction', address: string, tokenId: string, collectionAddress: string, status: string, firstBid: boolean, extended: boolean, seller: string, reserve: string, sellerFundsRecipient: string, highestBid: string, duration: string, startTime: string, currency: string, finder: string, findersFeeBps: string, estimatedDurationTime?: any | null, v3HighestBidder: string, v3FirstBidTime: string, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, v3AuctionReservePrice: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, highestBidPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | null, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | null };
+export type MarketQuery = { __typename?: 'RootQuery', market?: { __typename?: 'ActiveMarket', status: string, marketAddress: string, collectionAddress?: string | null, tokenId?: string | null, marketType: ActiveMarketType, networkInfo: { __typename: 'NetworkInfo', chain: Chain, network: Network }, transactionInfo: { __typename: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, properties?: { __typename: 'V3ReserveAuction', address: string, tokenId: string, collectionAddress: string, status: string, firstBid: boolean, extended: boolean, seller: string, reserve: string, sellerFundsRecipient: string, highestBid: string, duration: string, startTime: string, currency: string, finder: string, findersFeeBps: string, estimatedDurationTime?: any | null, v3HighestBidder: string, v3FirstBidTime: string, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, v3AuctionReservePrice: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, highestBidPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | null, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | null };
 
 export type MarketsQueryVariables = Exact<{
   networks: Array<NetworkInput> | NetworkInput;
@@ -3093,9 +1974,9 @@ export type MarketsQueryVariables = Exact<{
 }>;
 
 
-export type MarketsQuery = { __typename?: 'RootQuery', markets: { __typename: 'MarketWithTokenConnection', pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean, limit: number }, nodes: Array<{ __typename?: 'MarketWithToken', token?: { __typename: 'Token', tokenId: string, collectionAddress: string, lastRefreshTime?: any | null, owner?: string | null, name?: string | null, description?: string | null, metadata?: any | null, tokenUrl?: string | null, tokenUrlMimeType?: string | null, tokenContract?: { __typename?: 'TokenContract', name?: string | null, network: string, description?: string | null, collectionAddress: string, symbol?: string | null, chain: number } | null, mintInfo?: { __typename?: 'MintInfo', originatorAddress: string, toAddress: string, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, mintContext: { __typename: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null } } | null, image?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, content?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, attributes?: Array<{ __typename?: 'TokenAttribute', traitType?: string | null, value?: string | null, displayType?: string | null }> | null } | null, market: { __typename?: 'Market', collectionAddress?: string | null, marketAddress: string, marketType: MarketType, status: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, networkInfo: { __typename?: 'NetworkInfo', chain: Chain, network: Network }, properties?: { __typename: 'LilNounsAuction' } | { __typename: 'NounsAuction' } | { __typename: 'V1Ask', v1AskStatus: string, currency: string, amount: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1BidShare' } | { __typename: 'V1Offer', v1OfferStatus: string, sellOnShare: string, bidder: string, currency: string, amount: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2Auction', firstBidTime?: any | null, highestBidder?: string | null, curator: string, collectionAddress: string, curatorFeePercentage: number, tokenId: string, auctionCurrency: string, duration: string, estimatedExpirationTime?: any | null, v2AuctionStatus: string, tokenOwner: string, address: string, auctionId: string, approved: boolean, reservePrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, highestBidPrice?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | { __typename: 'V3Ask', buyer?: string | null, finder?: string | null, findersFeeBps?: number | null, sellerFundsRecipient?: string | null, v3AskStatus: string, seller: string, address: string, askCurrency: string, collectionAddress: string, askPrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3ReserveAuction' } | null } }> } };
+export type MarketsQuery = { __typename?: 'RootQuery', markets: { __typename: 'MarketWithTokenConnection', pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean, limit: number }, nodes: Array<{ __typename?: 'MarketWithToken', token?: { __typename: 'Token', tokenId: string, collectionAddress: string, lastRefreshTime?: any | null, owner?: string | null, name?: string | null, description?: string | null, metadata?: any | null, tokenUrl?: string | null, tokenUrlMimeType?: string | null, tokenContract?: { __typename?: 'TokenContract', name?: string | null, network: string, description?: string | null, collectionAddress: string, symbol?: string | null, chain: number } | null, mintInfo?: { __typename?: 'MintInfo', originatorAddress: string, toAddress: string, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, mintContext: { __typename: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null } } | null, image?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, content?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, attributes?: Array<{ __typename?: 'TokenAttribute', traitType?: string | null, value?: string | null, displayType?: string | null }> | null } | null, market: { __typename?: 'Market', collectionAddress?: string | null, marketAddress: string, marketType: MarketType, status: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, networkInfo: { __typename?: 'NetworkInfo', chain: Chain, network: Network }, properties?: { __typename: 'V3Ask', buyer?: string | null, finder?: string | null, findersFeeBps?: number | null, sellerFundsRecipient?: string | null, v3AskStatus: string, seller: string, address: string, askCurrency: string, collectionAddress: string, askPrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3ReserveAuction' } | null } }> } };
 
-export type MarketsOnMintInfoFragment = { __typename?: 'MintWithTokenAndMarkets', markets: Array<{ __typename?: 'Market', collectionAddress?: string | null, marketAddress: string, marketType: MarketType, status: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, networkInfo: { __typename?: 'NetworkInfo', chain: Chain, network: Network }, properties?: { __typename: 'LilNounsAuction' } | { __typename: 'NounsAuction' } | { __typename: 'V1Ask', v1AskStatus: string, currency: string, amount: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1BidShare' } | { __typename: 'V1Offer', v1OfferStatus: string, sellOnShare: string, bidder: string, currency: string, amount: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2Auction', firstBidTime?: any | null, highestBidder?: string | null, curator: string, collectionAddress: string, curatorFeePercentage: number, tokenId: string, auctionCurrency: string, duration: string, estimatedExpirationTime?: any | null, v2AuctionStatus: string, tokenOwner: string, address: string, auctionId: string, approved: boolean, reservePrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, highestBidPrice?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | { __typename: 'V3Ask', buyer?: string | null, finder?: string | null, findersFeeBps?: number | null, sellerFundsRecipient?: string | null, v3AskStatus: string, seller: string, address: string, askCurrency: string, collectionAddress: string, askPrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3ReserveAuction' } | null }> };
+export type MarketsOnMintInfoFragment = { __typename?: 'MintWithTokenAndMarkets', markets: Array<{ __typename?: 'Market', collectionAddress?: string | null, marketAddress: string, marketType: MarketType, status: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, networkInfo: { __typename?: 'NetworkInfo', chain: Chain, network: Network }, properties?: { __typename: 'V3Ask', buyer?: string | null, finder?: string | null, findersFeeBps?: number | null, sellerFundsRecipient?: string | null, v3AskStatus: string, seller: string, address: string, askCurrency: string, collectionAddress: string, askPrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3ReserveAuction' } | null }> };
 
 export type MintsQueryVariables = Exact<{
   networks: Array<NetworkInput> | NetworkInput;
@@ -3108,7 +1989,7 @@ export type MintsQueryVariables = Exact<{
 }>;
 
 
-export type MintsQuery = { __typename?: 'RootQuery', mints: { __typename: 'MintWithTokenAndMarketsConnection', pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean, limit: number }, nodes: Array<{ __typename: 'MintWithTokenAndMarkets', mint: { __typename?: 'Mint', collectionAddress: string, tokenId: string, originatorAddress: string, toAddress: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null } }, token?: { __typename: 'Token', tokenId: string, collectionAddress: string, lastRefreshTime?: any | null, owner?: string | null, name?: string | null, description?: string | null, metadata?: any | null, tokenUrl?: string | null, tokenUrlMimeType?: string | null, tokenContract?: { __typename?: 'TokenContract', name?: string | null, network: string, description?: string | null, collectionAddress: string, symbol?: string | null, chain: number } | null, mintInfo?: { __typename?: 'MintInfo', originatorAddress: string, toAddress: string, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, mintContext: { __typename: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null } } | null, image?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, content?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, attributes?: Array<{ __typename?: 'TokenAttribute', traitType?: string | null, value?: string | null, displayType?: string | null }> | null } | null, markets: Array<{ __typename?: 'Market', collectionAddress?: string | null, marketAddress: string, marketType: MarketType, status: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, networkInfo: { __typename?: 'NetworkInfo', chain: Chain, network: Network }, properties?: { __typename: 'LilNounsAuction' } | { __typename: 'NounsAuction' } | { __typename: 'V1Ask', v1AskStatus: string, currency: string, amount: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1BidShare' } | { __typename: 'V1Offer', v1OfferStatus: string, sellOnShare: string, bidder: string, currency: string, amount: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2Auction', firstBidTime?: any | null, highestBidder?: string | null, curator: string, collectionAddress: string, curatorFeePercentage: number, tokenId: string, auctionCurrency: string, duration: string, estimatedExpirationTime?: any | null, v2AuctionStatus: string, tokenOwner: string, address: string, auctionId: string, approved: boolean, reservePrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, highestBidPrice?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | { __typename: 'V3Ask', buyer?: string | null, finder?: string | null, findersFeeBps?: number | null, sellerFundsRecipient?: string | null, v3AskStatus: string, seller: string, address: string, askCurrency: string, collectionAddress: string, askPrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3ReserveAuction' } | null }> }> } };
+export type MintsQuery = { __typename?: 'RootQuery', mints: { __typename: 'MintWithTokenAndMarketsConnection', pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean, limit: number }, nodes: Array<{ __typename: 'MintWithTokenAndMarkets', mint: { __typename?: 'Mint', collectionAddress: string, tokenId: string, originatorAddress: string, toAddress: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null } }, token?: { __typename: 'Token', tokenId: string, collectionAddress: string, lastRefreshTime?: any | null, owner?: string | null, name?: string | null, description?: string | null, metadata?: any | null, tokenUrl?: string | null, tokenUrlMimeType?: string | null, tokenContract?: { __typename?: 'TokenContract', name?: string | null, network: string, description?: string | null, collectionAddress: string, symbol?: string | null, chain: number } | null, mintInfo?: { __typename?: 'MintInfo', originatorAddress: string, toAddress: string, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, mintContext: { __typename: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null } } | null, image?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, content?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, attributes?: Array<{ __typename?: 'TokenAttribute', traitType?: string | null, value?: string | null, displayType?: string | null }> | null } | null, markets: Array<{ __typename?: 'Market', collectionAddress?: string | null, marketAddress: string, marketType: MarketType, status: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, networkInfo: { __typename?: 'NetworkInfo', chain: Chain, network: Network }, properties?: { __typename: 'V3Ask', buyer?: string | null, finder?: string | null, findersFeeBps?: number | null, sellerFundsRecipient?: string | null, v3AskStatus: string, seller: string, address: string, askCurrency: string, collectionAddress: string, askPrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3ReserveAuction' } | null }> }> } };
 
 export type CollectionsQueryVariables = Exact<{
   networks: Array<NetworkInput> | NetworkInput;
@@ -3135,7 +2016,7 @@ export type SalesQuery = { __typename?: 'RootQuery', sales: { __typename: 'SaleW
 
 export type TokensSalesInfoFragment = { __typename?: 'TokenWithMarketsSummary', sales: Array<{ __typename?: 'Sale', saleContractAddress?: string | null, buyerAddress: string, collectionAddress: string, sellerAddress: string, tokenId: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } }> };
 
-export type TokensEventsInfoFragment = { __typename?: 'TokenWithMarketsSummary', events: Array<{ __typename?: 'Event', eventType: EventType, collectionAddress?: string | null, tokenId?: string | null, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, properties: { __typename: 'ApprovalEvent' } | { __typename: 'LilNounsAuctionEvent' } | { __typename: 'MintEvent', tokenId: string, collectionAddress: string, originatorAddress: string, toAddress: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'NounsAuctionEvent' } | { __typename: 'Sale' } | { __typename: 'SeaportEvent' } | { __typename: 'TransferEvent', fromAddress: string, toAddress: string, collectionAddress: string, tokenId: string } | { __typename: 'V1MarketEvent', v1MarketEventType: V1MarketEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V1MarketAskCreatedEventProperties', amount: string, currency: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketAskRemovedEventProperties', amount: string, currency: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketBidShareUpdatedEventProperties' } | { __typename: 'V1MarketOfferCreatedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketOfferFinalizedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketOfferRemovedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } } | { __typename: 'V2AuctionEvent', v2AuctionEventType: V2AuctionEventType, address: string, auctionId: number, collectionAddress: string, tokenId: string, properties: { __typename: 'V2AuctionApprovalUpdatedEventProperties', approved: boolean } | { __typename: 'V2AuctionBidEventProperties', sender: string, firstBid: boolean, extended: boolean, value: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2AuctionCanceledEventProperties', tokenOwner: string } | { __typename: 'V2AuctionCreatedEventProperties', auctionCurrency: string, tokenOwner: string, curator: string, curatorFeePercentage: number, duration: string, reservePrice: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2AuctionDurationExtendedEventProperties', duration: string } | { __typename: 'V2AuctionEndedEventProperties', tokenOwner: string, curator: string, winner: string, auctionCurrency: string, amount: string, curatorFee: string } | { __typename: 'V2AuctionReservePriceUpdatedEventProperties', reservePrice: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } } | { __typename: 'V3AskEvent', v3AskEventType: V3AskEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V3AskCanceledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskCreatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskFilledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, finder: string, buyer: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskPriceUpdatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3PrivateAskEventProperties' } } | { __typename: 'V3ReserveAuctionEvent' } }> };
+export type TokensEventsInfoFragment = { __typename?: 'TokenWithMarketsSummary', events: Array<{ __typename?: 'Event', eventType: EventType, collectionAddress?: string | null, tokenId?: string | null, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, properties: { __typename: 'ApprovalEvent' } | { __typename: 'MintEvent', tokenId: string, collectionAddress: string, originatorAddress: string, toAddress: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'Sale' } | { __typename: 'TransferEvent', fromAddress: string, toAddress: string, collectionAddress: string, tokenId: string } | { __typename: 'V3AskEvent', v3AskEventType: V3AskEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V3AskCanceledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskCreatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskFilledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, finder: string, buyer: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskPriceUpdatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3PrivateAskEventProperties' } } | { __typename: 'V3ReserveAuctionEvent' } }> };
 
 export type TokensQueryVariables = Exact<{
   networks: Array<NetworkInput> | NetworkInput;
@@ -3148,9 +2029,9 @@ export type TokensQueryVariables = Exact<{
 }>;
 
 
-export type TokensQuery = { __typename?: 'RootQuery', tokens: { __typename: 'TokenWithMarketsSummaryConnection', pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean, limit: number }, nodes: Array<{ __typename: 'TokenWithMarketsSummary', marketsSummary: Array<{ __typename?: 'Market', collectionAddress?: string | null, marketAddress: string, marketType: MarketType, status: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, networkInfo: { __typename?: 'NetworkInfo', chain: Chain, network: Network }, properties?: { __typename: 'LilNounsAuction' } | { __typename: 'NounsAuction' } | { __typename: 'V1Ask', v1AskStatus: string, currency: string, amount: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1BidShare' } | { __typename: 'V1Offer', v1OfferStatus: string, sellOnShare: string, bidder: string, currency: string, amount: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2Auction', firstBidTime?: any | null, highestBidder?: string | null, curator: string, collectionAddress: string, curatorFeePercentage: number, tokenId: string, auctionCurrency: string, duration: string, estimatedExpirationTime?: any | null, v2AuctionStatus: string, tokenOwner: string, address: string, auctionId: string, approved: boolean, reservePrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, highestBidPrice?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | { __typename: 'V3Ask', buyer?: string | null, finder?: string | null, findersFeeBps?: number | null, sellerFundsRecipient?: string | null, v3AskStatus: string, seller: string, address: string, askCurrency: string, collectionAddress: string, askPrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3ReserveAuction' } | null }>, token: { __typename: 'Token', tokenId: string, collectionAddress: string, lastRefreshTime?: any | null, owner?: string | null, name?: string | null, description?: string | null, metadata?: any | null, tokenUrl?: string | null, tokenUrlMimeType?: string | null, tokenContract?: { __typename?: 'TokenContract', name?: string | null, network: string, description?: string | null, collectionAddress: string, symbol?: string | null, chain: number } | null, mintInfo?: { __typename?: 'MintInfo', originatorAddress: string, toAddress: string, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, mintContext: { __typename: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null } } | null, image?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, content?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, attributes?: Array<{ __typename?: 'TokenAttribute', traitType?: string | null, value?: string | null, displayType?: string | null }> | null }, sales: Array<{ __typename?: 'Sale', saleContractAddress?: string | null, buyerAddress: string, collectionAddress: string, sellerAddress: string, tokenId: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } }>, events: Array<{ __typename?: 'Event', eventType: EventType, collectionAddress?: string | null, tokenId?: string | null, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, properties: { __typename: 'ApprovalEvent' } | { __typename: 'LilNounsAuctionEvent' } | { __typename: 'MintEvent', tokenId: string, collectionAddress: string, originatorAddress: string, toAddress: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'NounsAuctionEvent' } | { __typename: 'Sale' } | { __typename: 'SeaportEvent' } | { __typename: 'TransferEvent', fromAddress: string, toAddress: string, collectionAddress: string, tokenId: string } | { __typename: 'V1MarketEvent', v1MarketEventType: V1MarketEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V1MarketAskCreatedEventProperties', amount: string, currency: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketAskRemovedEventProperties', amount: string, currency: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketBidShareUpdatedEventProperties' } | { __typename: 'V1MarketOfferCreatedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketOfferFinalizedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketOfferRemovedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } } | { __typename: 'V2AuctionEvent', v2AuctionEventType: V2AuctionEventType, address: string, auctionId: number, collectionAddress: string, tokenId: string, properties: { __typename: 'V2AuctionApprovalUpdatedEventProperties', approved: boolean } | { __typename: 'V2AuctionBidEventProperties', sender: string, firstBid: boolean, extended: boolean, value: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2AuctionCanceledEventProperties', tokenOwner: string } | { __typename: 'V2AuctionCreatedEventProperties', auctionCurrency: string, tokenOwner: string, curator: string, curatorFeePercentage: number, duration: string, reservePrice: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2AuctionDurationExtendedEventProperties', duration: string } | { __typename: 'V2AuctionEndedEventProperties', tokenOwner: string, curator: string, winner: string, auctionCurrency: string, amount: string, curatorFee: string } | { __typename: 'V2AuctionReservePriceUpdatedEventProperties', reservePrice: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } } | { __typename: 'V3AskEvent', v3AskEventType: V3AskEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V3AskCanceledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskCreatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskFilledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, finder: string, buyer: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskPriceUpdatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3PrivateAskEventProperties' } } | { __typename: 'V3ReserveAuctionEvent' } }> }> } };
+export type TokensQuery = { __typename?: 'RootQuery', tokens: { __typename: 'TokenWithMarketsSummaryConnection', pageInfo: { __typename?: 'PageInfo', endCursor?: string | null, hasNextPage: boolean, limit: number }, nodes: Array<{ __typename: 'TokenWithMarketsSummary', marketsSummary: Array<{ __typename?: 'Market', collectionAddress?: string | null, marketAddress: string, marketType: MarketType, status: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, networkInfo: { __typename?: 'NetworkInfo', chain: Chain, network: Network }, properties?: { __typename: 'V3Ask', buyer?: string | null, finder?: string | null, findersFeeBps?: number | null, sellerFundsRecipient?: string | null, v3AskStatus: string, seller: string, address: string, askCurrency: string, collectionAddress: string, askPrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3ReserveAuction' } | null }>, token: { __typename: 'Token', tokenId: string, collectionAddress: string, lastRefreshTime?: any | null, owner?: string | null, name?: string | null, description?: string | null, metadata?: any | null, tokenUrl?: string | null, tokenUrlMimeType?: string | null, tokenContract?: { __typename?: 'TokenContract', name?: string | null, network: string, description?: string | null, collectionAddress: string, symbol?: string | null, chain: number } | null, mintInfo?: { __typename?: 'MintInfo', originatorAddress: string, toAddress: string, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, mintContext: { __typename: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null } } | null, image?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, content?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, attributes?: Array<{ __typename?: 'TokenAttribute', traitType?: string | null, value?: string | null, displayType?: string | null }> | null }, sales: Array<{ __typename?: 'Sale', saleContractAddress?: string | null, buyerAddress: string, collectionAddress: string, sellerAddress: string, tokenId: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } }>, events: Array<{ __typename?: 'Event', eventType: EventType, collectionAddress?: string | null, tokenId?: string | null, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, properties: { __typename: 'ApprovalEvent' } | { __typename: 'MintEvent', tokenId: string, collectionAddress: string, originatorAddress: string, toAddress: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'Sale' } | { __typename: 'TransferEvent', fromAddress: string, toAddress: string, collectionAddress: string, tokenId: string } | { __typename: 'V3AskEvent', v3AskEventType: V3AskEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V3AskCanceledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskCreatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskFilledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, finder: string, buyer: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskPriceUpdatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3PrivateAskEventProperties' } } | { __typename: 'V3ReserveAuctionEvent' } }> }> } };
 
-export type TokenFullDetailsFragment = { __typename?: 'TokenWithFullMarketHistory', sales: Array<{ __typename?: 'Sale', saleContractAddress?: string | null, buyerAddress: string, collectionAddress: string, sellerAddress: string, tokenId: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } }>, events: Array<{ __typename?: 'Event', eventType: EventType, collectionAddress?: string | null, tokenId?: string | null, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, properties: { __typename: 'ApprovalEvent' } | { __typename: 'LilNounsAuctionEvent' } | { __typename: 'MintEvent', tokenId: string, collectionAddress: string, originatorAddress: string, toAddress: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'NounsAuctionEvent' } | { __typename: 'Sale' } | { __typename: 'SeaportEvent' } | { __typename: 'TransferEvent', fromAddress: string, toAddress: string, collectionAddress: string, tokenId: string } | { __typename: 'V1MarketEvent', v1MarketEventType: V1MarketEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V1MarketAskCreatedEventProperties', amount: string, currency: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketAskRemovedEventProperties', amount: string, currency: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketBidShareUpdatedEventProperties' } | { __typename: 'V1MarketOfferCreatedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketOfferFinalizedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketOfferRemovedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } } | { __typename: 'V2AuctionEvent', v2AuctionEventType: V2AuctionEventType, address: string, auctionId: number, collectionAddress: string, tokenId: string, properties: { __typename: 'V2AuctionApprovalUpdatedEventProperties', approved: boolean } | { __typename: 'V2AuctionBidEventProperties', sender: string, firstBid: boolean, extended: boolean, value: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2AuctionCanceledEventProperties', tokenOwner: string } | { __typename: 'V2AuctionCreatedEventProperties', auctionCurrency: string, tokenOwner: string, curator: string, curatorFeePercentage: number, duration: string, reservePrice: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2AuctionDurationExtendedEventProperties', duration: string } | { __typename: 'V2AuctionEndedEventProperties', tokenOwner: string, curator: string, winner: string, auctionCurrency: string, amount: string, curatorFee: string } | { __typename: 'V2AuctionReservePriceUpdatedEventProperties', reservePrice: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } } | { __typename: 'V3AskEvent', v3AskEventType: V3AskEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V3AskCanceledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskCreatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskFilledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, finder: string, buyer: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskPriceUpdatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3PrivateAskEventProperties' } } | { __typename: 'V3ReserveAuctionEvent' } }> };
+export type TokenFullDetailsFragment = { __typename?: 'TokenWithFullMarketHistory', sales: Array<{ __typename?: 'Sale', saleContractAddress?: string | null, buyerAddress: string, collectionAddress: string, sellerAddress: string, tokenId: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } }>, events: Array<{ __typename?: 'Event', eventType: EventType, collectionAddress?: string | null, tokenId?: string | null, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, properties: { __typename: 'ApprovalEvent' } | { __typename: 'MintEvent', tokenId: string, collectionAddress: string, originatorAddress: string, toAddress: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'Sale' } | { __typename: 'TransferEvent', fromAddress: string, toAddress: string, collectionAddress: string, tokenId: string } | { __typename: 'V3AskEvent', v3AskEventType: V3AskEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V3AskCanceledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskCreatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskFilledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, finder: string, buyer: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskPriceUpdatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3PrivateAskEventProperties' } } | { __typename: 'V3ReserveAuctionEvent' } }> };
 
 export type TokenQueryVariables = Exact<{
   network: NetworkInput;
@@ -3159,24 +2040,7 @@ export type TokenQueryVariables = Exact<{
 }>;
 
 
-export type TokenQuery = { __typename?: 'RootQuery', token?: { __typename: 'TokenWithFullMarketHistory', token: { __typename: 'Token', tokenId: string, collectionAddress: string, lastRefreshTime?: any | null, owner?: string | null, name?: string | null, description?: string | null, metadata?: any | null, tokenUrl?: string | null, tokenUrlMimeType?: string | null, tokenContract?: { __typename?: 'TokenContract', name?: string | null, network: string, description?: string | null, collectionAddress: string, symbol?: string | null, chain: number } | null, mintInfo?: { __typename?: 'MintInfo', originatorAddress: string, toAddress: string, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, mintContext: { __typename: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null } } | null, image?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, content?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, attributes?: Array<{ __typename?: 'TokenAttribute', traitType?: string | null, value?: string | null, displayType?: string | null }> | null }, markets: Array<{ __typename?: 'Market', collectionAddress?: string | null, marketAddress: string, marketType: MarketType, status: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, networkInfo: { __typename?: 'NetworkInfo', chain: Chain, network: Network }, properties?: { __typename: 'LilNounsAuction' } | { __typename: 'NounsAuction' } | { __typename: 'V1Ask', v1AskStatus: string, currency: string, amount: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1BidShare' } | { __typename: 'V1Offer', v1OfferStatus: string, sellOnShare: string, bidder: string, currency: string, amount: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2Auction', firstBidTime?: any | null, highestBidder?: string | null, curator: string, collectionAddress: string, curatorFeePercentage: number, tokenId: string, auctionCurrency: string, duration: string, estimatedExpirationTime?: any | null, v2AuctionStatus: string, tokenOwner: string, address: string, auctionId: string, approved: boolean, reservePrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, highestBidPrice?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null } | { __typename: 'V3Ask', buyer?: string | null, finder?: string | null, findersFeeBps?: number | null, sellerFundsRecipient?: string | null, v3AskStatus: string, seller: string, address: string, askCurrency: string, collectionAddress: string, askPrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3ReserveAuction' } | null }>, sales: Array<{ __typename?: 'Sale', saleContractAddress?: string | null, buyerAddress: string, collectionAddress: string, sellerAddress: string, tokenId: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } }>, events: Array<{ __typename?: 'Event', eventType: EventType, collectionAddress?: string | null, tokenId?: string | null, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, properties: { __typename: 'ApprovalEvent' } | { __typename: 'LilNounsAuctionEvent' } | { __typename: 'MintEvent', tokenId: string, collectionAddress: string, originatorAddress: string, toAddress: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'NounsAuctionEvent' } | { __typename: 'Sale' } | { __typename: 'SeaportEvent' } | { __typename: 'TransferEvent', fromAddress: string, toAddress: string, collectionAddress: string, tokenId: string } | { __typename: 'V1MarketEvent', v1MarketEventType: V1MarketEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V1MarketAskCreatedEventProperties', amount: string, currency: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketAskRemovedEventProperties', amount: string, currency: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketBidShareUpdatedEventProperties' } | { __typename: 'V1MarketOfferCreatedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketOfferFinalizedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V1MarketOfferRemovedEventProperties', amount: string, currency: string, bidder: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } } | { __typename: 'V2AuctionEvent', v2AuctionEventType: V2AuctionEventType, address: string, auctionId: number, collectionAddress: string, tokenId: string, properties: { __typename: 'V2AuctionApprovalUpdatedEventProperties', approved: boolean } | { __typename: 'V2AuctionBidEventProperties', sender: string, firstBid: boolean, extended: boolean, value: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2AuctionCanceledEventProperties', tokenOwner: string } | { __typename: 'V2AuctionCreatedEventProperties', auctionCurrency: string, tokenOwner: string, curator: string, curatorFeePercentage: number, duration: string, reservePrice: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V2AuctionDurationExtendedEventProperties', duration: string } | { __typename: 'V2AuctionEndedEventProperties', tokenOwner: string, curator: string, winner: string, auctionCurrency: string, amount: string, curatorFee: string } | { __typename: 'V2AuctionReservePriceUpdatedEventProperties', reservePrice: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } } | { __typename: 'V3AskEvent', v3AskEventType: V3AskEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V3AskCanceledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskCreatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskFilledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, finder: string, buyer: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskPriceUpdatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3PrivateAskEventProperties' } } | { __typename: 'V3ReserveAuctionEvent' } }> } | null };
-
-export type SeaportOrderItemDetailsFragment = { __typename?: 'SeaportOrderItem', itemType: string, address: string, tokenId?: string | null, criteria?: string | null, startAmount: string, endAmount: string, recipient?: string | null, startPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, endPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null };
-
-export type SeaportOrderDetailsFragment = { __typename?: 'SeaportOrder', orderHash: string, offerer: string, startTime: any, endTime: any, orderType: string, zone: string, zoneHash: string, salt: string, conduitKey: string, counter: string, signature: string, schemaHash: string, price: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, offers: Array<{ __typename: 'SeaportOrderItem', itemType: string, address: string, tokenId?: string | null, criteria?: string | null, startAmount: string, endAmount: string, recipient?: string | null, startPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, endPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null }>, considerations: Array<{ __typename: 'SeaportOrderItem', itemType: string, address: string, tokenId?: string | null, criteria?: string | null, startAmount: string, endAmount: string, recipient?: string | null, startPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, endPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null }> };
-
-export type OffchainOrderInfoFragment = { __typename?: 'OffchainOrder', contractAddress: string, collectionAddress?: string | null, tokenId?: string | null, offerer: string, startTime: any, endTime: any, orderType: string, calldata?: string | null, networkInfo: { __typename: 'NetworkInfo', chain: Chain, network: Network }, price: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, properties: { __typename?: 'SeaportOrder', orderHash: string, offerer: string, startTime: any, endTime: any, orderType: string, zone: string, zoneHash: string, salt: string, conduitKey: string, counter: string, signature: string, schemaHash: string, price: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, offers: Array<{ __typename: 'SeaportOrderItem', itemType: string, address: string, tokenId?: string | null, criteria?: string | null, startAmount: string, endAmount: string, recipient?: string | null, startPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, endPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null }>, considerations: Array<{ __typename: 'SeaportOrderItem', itemType: string, address: string, tokenId?: string | null, criteria?: string | null, startAmount: string, endAmount: string, recipient?: string | null, startPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, endPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null }> } };
-
-export type OffchainOrdersQueryVariables = Exact<{
-  networks?: InputMaybe<Array<NetworkInput> | NetworkInput>;
-  where?: InputMaybe<OffchainOrdersQueryInput>;
-  filter?: InputMaybe<OffchainOrdersQueryFilter>;
-  sort?: InputMaybe<OffchainOrderSortKeySortInput>;
-  pagination?: InputMaybe<PaginationInput>;
-}>;
-
-
-export type OffchainOrdersQuery = { __typename?: 'RootQuery', offchainOrders: { __typename?: 'OffchainOrderWithTokenConnection', nodes: Array<{ __typename: 'OffchainOrderWithToken', token?: { __typename: 'Token', tokenId: string, collectionAddress: string, lastRefreshTime?: any | null, owner?: string | null, name?: string | null, description?: string | null, tokenContract?: { __typename?: 'TokenContract', name?: string | null, network: string, description?: string | null, collectionAddress: string, symbol?: string | null, chain: number } | null, mintInfo?: { __typename?: 'MintInfo', originatorAddress: string, toAddress: string, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, mintContext: { __typename: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null } } | null, image?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, content?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null } | null, offchainOrder: { __typename: 'OffchainOrder', contractAddress: string, collectionAddress?: string | null, tokenId?: string | null, offerer: string, startTime: any, endTime: any, orderType: string, calldata?: string | null, networkInfo: { __typename: 'NetworkInfo', chain: Chain, network: Network }, price: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, properties: { __typename?: 'SeaportOrder', orderHash: string, offerer: string, startTime: any, endTime: any, orderType: string, zone: string, zoneHash: string, salt: string, conduitKey: string, counter: string, signature: string, schemaHash: string, price: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null }, offers: Array<{ __typename: 'SeaportOrderItem', itemType: string, address: string, tokenId?: string | null, criteria?: string | null, startAmount: string, endAmount: string, recipient?: string | null, startPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, endPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null }>, considerations: Array<{ __typename: 'SeaportOrderItem', itemType: string, address: string, tokenId?: string | null, criteria?: string | null, startAmount: string, endAmount: string, recipient?: string | null, startPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, endPrice?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null }> } } }>, pageInfo: { __typename: 'PageInfo', endCursor?: string | null, hasNextPage: boolean, limit: number } } };
+export type TokenQuery = { __typename?: 'RootQuery', token?: { __typename: 'TokenWithFullMarketHistory', token: { __typename: 'Token', tokenId: string, collectionAddress: string, lastRefreshTime?: any | null, owner?: string | null, name?: string | null, description?: string | null, metadata?: any | null, tokenUrl?: string | null, tokenUrlMimeType?: string | null, tokenContract?: { __typename?: 'TokenContract', name?: string | null, network: string, description?: string | null, collectionAddress: string, symbol?: string | null, chain: number } | null, mintInfo?: { __typename?: 'MintInfo', originatorAddress: string, toAddress: string, price?: { __typename: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, mintContext: { __typename: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null } } | null, image?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, content?: { __typename?: 'TokenContentMedia', size?: string | null, url?: string | null, mimeType?: string | null, mediaEncoding?: { __typename: 'AudioEncodingTypes', original: string, large?: string | null } | { __typename: 'ImageEncodingTypes', original: string, large?: string | null, poster?: string | null, thumbnail?: string | null } | { __typename: 'UnsupportedEncodingTypes', original: string } | { __typename: 'VideoEncodingTypes', original: string, large?: string | null, poster?: string | null, preview?: string | null, thumbnail?: string | null } | null } | null, attributes?: Array<{ __typename?: 'TokenAttribute', traitType?: string | null, value?: string | null, displayType?: string | null }> | null }, markets: Array<{ __typename?: 'Market', collectionAddress?: string | null, marketAddress: string, marketType: MarketType, status: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price?: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } | null, networkInfo: { __typename?: 'NetworkInfo', chain: Chain, network: Network }, properties?: { __typename: 'V3Ask', buyer?: string | null, finder?: string | null, findersFeeBps?: number | null, sellerFundsRecipient?: string | null, v3AskStatus: string, seller: string, address: string, askCurrency: string, collectionAddress: string, askPrice: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3ReserveAuction' } | null }>, sales: Array<{ __typename?: 'Sale', saleContractAddress?: string | null, buyerAddress: string, collectionAddress: string, sellerAddress: string, tokenId: string, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } }>, events: Array<{ __typename?: 'Event', eventType: EventType, collectionAddress?: string | null, tokenId?: string | null, transactionInfo: { __typename?: 'TransactionInfo', blockNumber: number, blockTimestamp: any, transactionHash?: string | null, logIndex?: number | null }, properties: { __typename: 'ApprovalEvent' } | { __typename: 'MintEvent', tokenId: string, collectionAddress: string, originatorAddress: string, toAddress: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'Sale' } | { __typename: 'TransferEvent', fromAddress: string, toAddress: string, collectionAddress: string, tokenId: string } | { __typename: 'V3AskEvent', v3AskEventType: V3AskEventType, address: string, collectionAddress: string, tokenId: string, properties: { __typename: 'V3AskCanceledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskCreatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskFilledEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, finder: string, buyer: string, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3AskPriceUpdatedEventProperties', seller: string, sellerFundsRecipient: string, askCurrency: string, askPrice: string, findersFeeBps: number, price: { __typename?: 'PriceAtTime', blockNumber: number, chainTokenPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null, nativePrice: { __typename?: 'CurrencyAmount', decimal: number, raw: string, currency: { __typename?: 'Currency', address: string, decimals: number, name: string } }, usdcPrice?: { __typename?: 'CurrencyAmount', decimal: number, raw: string } | null } } | { __typename: 'V3PrivateAskEventProperties' } } | { __typename: 'V3ReserveAuctionEvent' } }> } | null };
 
 export type AggregateAttributesQueryVariables = Exact<{
   networks: Array<NetworkInput> | NetworkInput;
